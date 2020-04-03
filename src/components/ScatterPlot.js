@@ -6,16 +6,13 @@ import Spinner from "./Spinner";
 import MouseTooltip from "react-sticky-mouse-tooltip";
 import TooltipContent from "./TooltipContent";
 import ChronDataTopPart from "./ChronDataTopPart";
-import CountrySelection from "./CountrySelection";
 import countryColors from "../assets/countryColors";
-
 import {getWorldTotalsHopkinsData} from "../utils/functions";
-
 import CountrySelector from "./CountrySelector";
 
 
 const ScatterPlot = props => {
-  const {country, showMap} = props;
+  const { country, showMap, noCountrySelected, nowShowACountry } = props;
   const [countriesSelected, setCountriesSelected] = React.useState([country]);
   const allChronologicalData = useDataMassaging();
   const [currentData, setCurrentData] = React.useState(null);
@@ -28,6 +25,9 @@ const ScatterPlot = props => {
   const height = 420;
   const padding = { top: 20, right: width / 10, bottom: 20, left: width / 10 };
 
+   React.useEffect(() => console.log("NOCOUNTRY?", noCountrySelected), [
+     noCountrySelected
+   ]);
 
   // Manage adding country for comparison
   const [isCountryListShowing, setIsCountryListShowing] = React.useState(false);
@@ -43,16 +43,15 @@ const ScatterPlot = props => {
       let allDays = [];
       currentData.forEach(set => {
         const days = set[topic].map(entry => entry.daySinceBeginning);
-        allDays.push(...days)
-      })
-      setDayCounts(allDays)
+        allDays.push(...days);
+      });
+      setDayCounts(allDays);
     }
-  }, [currentData])
+  }, [currentData]);
 
-  
   // See absolute data or data / 1 mill pop
   const [showPerMillion, setShowPerMillion] = React.useState(false);
-  
+
   const toggleMillionAbsolute = () => {
     if (showPerMillion) {
       setTopic("activeCases");
@@ -62,38 +61,41 @@ const ScatterPlot = props => {
     setShowPerMillion(!showPerMillion);
   };
 
-
   React.useEffect(() => {
     if (allChronologicalData) {
       console.log("ALL CHRON", allChronologicalData);
       getWorldTotalsHopkinsData(allChronologicalData);
       const dataToSet = [];
-      countriesSelected.map(country => dataToSet.push(...allChronologicalData.filter(entry => entry.country === country)));
+      countriesSelected.map(country =>
+        dataToSet.push(
+          ...allChronologicalData.filter(entry => entry.country === country)
+        )
+      );
       setCurrentData(dataToSet);
     }
   }, [allChronologicalData, countriesSelected]);
 
-
   const showDataForAnotherCountry = countryName => {
     setCountriesSelected([...countriesSelected, countryName]);
-  }
+  };
 
   const removeCountryData = countryName => {
     const toSet = countriesSelected.filter(entry => entry !== countryName);
     setCountriesSelected(toSet);
-  }
+  };
 
   const changeTopic = topic => {
     setTopic(topic);
-  }
+  };
 
   const switchChronologicalComparison = () => {
-    console.log("COPY?")
+    console.log("COPY?");
     setIsShowingFromDayOne(!isShowingFromDayOne);
-  }
+  };
 
-  const allCountries = allChronologicalData ? allChronologicalData.map(
-    entry => entry.country).sort() : undefined;
+  const allCountries = allChronologicalData
+    ? allChronologicalData.map(entry => entry.country).sort()
+    : undefined;
 
   React.useEffect(() => {
     if (currentData) {
@@ -199,18 +201,9 @@ const ScatterPlot = props => {
           .attr("opacity", "0.6")
           .attr("r", width > 800 ? 4.5 : 2)
           .attr("fill", countryColors[index])
-          // .on("mouseover", d => {
-          //   setIsTooltipVisible(true);
-          //   setTooltipContent({
-          //     title: set.country,
-          //     label: !isShowingFromDayOne
-          //       ? d3.timeFormat("%d-%m-%y")(d.date)
-          //       : `DAY ${d.daySinceBeginning}`,
-          //     data: d.cases
-          //   });
-          // })
           .on("mouseover", (d, i) => {
-            const differenceFromDayBefore = i === 0 ? "NA" : +(d.cases - set[topic][i - 1].cases).toFixed(2);
+            const differenceFromDayBefore =
+              i === 0 ? "NA" : +(d.cases - set[topic][i - 1].cases).toFixed(2);
             setIsTooltipVisible(true);
             setTooltipContent({
               title: set.country,
@@ -221,7 +214,9 @@ const ScatterPlot = props => {
               details:
                 i === 0
                   ? `+${d.cases} from day before`
-                  : `+${differenceFromDayBefore} from day before (+${(differenceFromDayBefore / d.cases).toFixed(2)}%)`
+                  : `+${differenceFromDayBefore} from day before (+${(
+                      differenceFromDayBefore / d.cases
+                    ).toFixed(2)}%)`
             });
           })
           .on("mouseout", () => {
@@ -233,8 +228,20 @@ const ScatterPlot = props => {
   }, [currentData, country, topic, isShowingFromDayOne]);
 
   if (!allChronologicalData) {
-    return <Spinner />
+    return <Spinner />;
   }
+
+  // if (noCountrySelected) {
+  //   return (
+  //     <CountrySelector
+  //       allCountries={allCountries}
+  //       showDataForAnotherCountry={showDataForAnotherCountry}
+  //       countriesSelected={countriesSelected}
+  //       closeCountryList={closeCountryList}
+  //       nowShowACountry={nowShowACountry}
+  //     />
+  //   );
+  // }
 
   return (
     <div
@@ -261,12 +268,13 @@ const ScatterPlot = props => {
         toggleMillionAbsolute={toggleMillionAbsolute}
         openCountryList={openCountryList}
       />
-      {isCountryListShowing && (
+      {(isCountryListShowing || noCountrySelected) && (
         <CountrySelector
           allCountries={allCountries}
           showDataForAnotherCountry={showDataForAnotherCountry}
           countriesSelected={countriesSelected}
           closeCountryList={closeCountryList}
+          nowShowACountry={nowShowACountry}
         />
       )}
       <div ref={svgContainer}></div>
@@ -285,7 +293,7 @@ const ScatterPlot = props => {
       /> */}
     </div>
   );
-}
+};
 
 const Styles = {
   tooltip: {

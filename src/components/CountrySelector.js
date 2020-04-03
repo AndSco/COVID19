@@ -4,13 +4,22 @@ import {faTimesCircle} from "@fortawesome/free-solid-svg-icons";
 
 
 const CountryLine = props => {
-  const { countryName, showDataForAnotherCountry, countriesSelected, closeCountryList } = props;
+  const {
+    countryName,
+    showDataForAnotherCountry,
+    countriesSelected,
+    closeCountryList,
+    nowShowACountry
+  } = props;
   const isAlreadySelected = countryName => {
     return countriesSelected.indexOf(countryName) !== -1;
   };
 
   const updateCountriesSelected = countryName => {
     showDataForAnotherCountry(countryName);
+    if (nowShowACountry){
+      nowShowACountry();
+    };
     closeCountryList();
   };
 
@@ -62,8 +71,16 @@ const CountrySelector = props => {
         style={{ position: "fixed", top: 25, right: 25, cursor: "pointer" }}
         onClick={closeCountryList}
       />
-      <input type="text" placeholder="Type country initials" style={Styles.input} className="search-input" value={input} onChange={handleChange} />
-      
+      <h2 style={{ color: "#FFFF00" }}>Choose a country to visualise data</h2>
+      <input
+        type="text"
+        placeholder="Type country initials"
+        style={Styles.input}
+        className="search-input"
+        value={input}
+        onChange={handleChange}
+      />
+
       {filteredCountries.map((country, index) => (
         <CountryLine
           countryName={country}

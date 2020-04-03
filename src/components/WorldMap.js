@@ -5,6 +5,7 @@ import TooltipContent from "./TooltipContent";
 import MouseTooltip from "react-sticky-mouse-tooltip";
 import useWindowDimensions from "../utils/useWindowDimensions";
 
+
 const projection = geoEqualEarth()
   .scale(160)
   .translate([800 / 2, 450 / 2]);
@@ -91,7 +92,6 @@ const WorldMap = props => {
       >
         <TooltipContent content={tooltipContent} />
       </MouseTooltip>
-
       <svg
         width={`${width}px`}
         height={`${height * 0.85}px`}
