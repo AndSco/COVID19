@@ -69,6 +69,7 @@ const Table = props => {
 
   return (
     <div id="table-container">
+      <p>Sort countries by clicking on the table headers. Find a country in the search bar. Click on a country to see its chronological data.</p>
       <SearchBox filterElements={filterElements} resetData={resetData} />
       <table>
         <thead>
