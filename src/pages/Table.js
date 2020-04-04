@@ -6,7 +6,7 @@ import {
   faSortAmountDownAlt,
   faExchangeAlt
 } from "@fortawesome/free-solid-svg-icons";
-import SearchBox from "./SearchBox";
+import SearchBox from "../components/SearchBox";
 
 const tableHeaders = [
   "country",

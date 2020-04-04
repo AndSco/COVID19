@@ -2,17 +2,22 @@ import React from "react";
 import * as d3 from "d3";
 import useWindowDimensions from "../utils/useWindowDimensions";
 import {useDataMassaging} from "../utils/useDataMassaging";
-import Spinner from "./Spinner";
+import Spinner from "../components/Spinner";
 import MouseTooltip from "react-sticky-mouse-tooltip";
-import TooltipContent from "./TooltipContent";
-import ChronDataTopPart from "./ChronDataTopPart";
+import TooltipContent from "../components/TooltipContent";
+import ChronDataTopPart from "../components/ChronDataTopPart";
 import countryColors from "../assets/countryColors";
 import {getWorldTotalsHopkinsData} from "../utils/functions";
-import CountrySelector from "./CountrySelector";
+import CountrySelector from "../components/CountrySelector";
 
 
 const ScatterPlot = props => {
-  const { country, showMap, noCountrySelected, nowShowACountry } = props;
+  const {
+    country,
+    changePage,
+    noCountrySelected,
+    goToChronWithCountrySelected
+  } = props;
   const [countriesSelected, setCountriesSelected] = React.useState([country]);
   const allChronologicalData = useDataMassaging();
   const [currentData, setCurrentData] = React.useState(null);
@@ -23,7 +28,7 @@ const ScatterPlot = props => {
   const svgContainer = React.useRef();
   const { width } = useWindowDimensions();
   const height = 420;
-  const padding = { top: 20, right: width / 10, bottom: 20, left: width / 10 };
+  const padding = { top: 40, right: width / 10, bottom: 40, left: width / 10 };
 
    React.useEffect(() => console.log("NOCOUNTRY?", noCountrySelected), [
      noCountrySelected
@@ -33,6 +38,8 @@ const ScatterPlot = props => {
   const [isCountryListShowing, setIsCountryListShowing] = React.useState(false);
   const openCountryList = () => setIsCountryListShowing(true);
   const closeCountryList = () => setIsCountryListShowing(false);
+
+  React.useEffect(() => console.log("LIST SHOWING?", isCountryListShowing), [isCountryListShowing]);
 
   // FOR COMPARING BY EPIDEMIC DURATION -
   // set the number of days to find the longest and set the appropriate scale
@@ -63,7 +70,7 @@ const ScatterPlot = props => {
 
   React.useEffect(() => {
     if (allChronologicalData) {
-      console.log("ALL CHRON", allChronologicalData);
+      // console.log("ALL CHRON", allChronologicalData);
       getWorldTotalsHopkinsData(allChronologicalData);
       const dataToSet = [];
       countriesSelected.map(country =>
@@ -231,17 +238,6 @@ const ScatterPlot = props => {
     return <Spinner />;
   }
 
-  // if (noCountrySelected) {
-  //   return (
-  //     <CountrySelector
-  //       allCountries={allCountries}
-  //       showDataForAnotherCountry={showDataForAnotherCountry}
-  //       countriesSelected={countriesSelected}
-  //       closeCountryList={closeCountryList}
-  //       nowShowACountry={nowShowACountry}
-  //     />
-  //   );
-  // }
 
   return (
     <div
@@ -257,7 +253,7 @@ const ScatterPlot = props => {
         currentData={currentData}
         topic={topic}
         changeTopic={changeTopic}
-        showMap={showMap}
+        changePage={changePage}
         allCountries={allCountries}
         showDataForAnotherCountry={showDataForAnotherCountry}
         removeCountryData={removeCountryData}
@@ -274,7 +270,8 @@ const ScatterPlot = props => {
           showDataForAnotherCountry={showDataForAnotherCountry}
           countriesSelected={countriesSelected}
           closeCountryList={closeCountryList}
-          nowShowACountry={nowShowACountry}
+          noCountrySelected={noCountrySelected}
+          goToChronWithCountrySelected={goToChronWithCountrySelected}
         />
       )}
       <div ref={svgContainer}></div>

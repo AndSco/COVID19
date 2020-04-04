@@ -9,7 +9,7 @@ const CountryLine = props => {
     showDataForAnotherCountry,
     countriesSelected,
     closeCountryList,
-    nowShowACountry
+    goToChronWithCountrySelected
   } = props;
   const isAlreadySelected = countryName => {
     return countriesSelected.indexOf(countryName) !== -1;
@@ -17,8 +17,9 @@ const CountryLine = props => {
 
   const updateCountriesSelected = countryName => {
     showDataForAnotherCountry(countryName);
-    if (nowShowACountry){
-      nowShowACountry();
+    if (goToChronWithCountrySelected) {
+      console.log("now SHOW");
+      goToChronWithCountrySelected();
     };
     closeCountryList();
   };
@@ -48,7 +49,9 @@ const CountrySelector = props => {
     allCountries,
     showDataForAnotherCountry,
     countriesSelected,
-    closeCountryList 
+    closeCountryList,
+    goToChronWithCountrySelected, 
+    noCountrySelected
   } = props;
 
   const [input, setInput] = React.useState("");
@@ -65,12 +68,14 @@ const CountrySelector = props => {
 
   return (
     <div style={Styles.box}>
-      <FontAwesomeIcon
-        icon={faTimesCircle}
-        size="2x"
-        style={{ position: "fixed", top: 25, right: 25, cursor: "pointer" }}
-        onClick={closeCountryList}
-      />
+      {!noCountrySelected && (
+        <FontAwesomeIcon
+          icon={faTimesCircle}
+          size="2x"
+          style={{ position: "fixed", top: 25, right: 25, cursor: "pointer" }}
+          onClick={closeCountryList}
+        />
+      )}
       <h2 style={{ color: "#FFFF00" }}>Choose a country to visualise data</h2>
       <input
         type="text"
@@ -88,6 +93,7 @@ const CountrySelector = props => {
           showDataForAnotherCountry={showDataForAnotherCountry}
           countriesSelected={countriesSelected}
           closeCountryList={closeCountryList}
+          goToChronWithCountrySelected={goToChronWithCountrySelected}
         />
       ))}
     </div>

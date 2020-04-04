@@ -8,7 +8,12 @@ const MenuItem = props => {
     <div className="menu-item">
       <h6
         onClick={() => changeParameter(label)}
-        style={{ color: isSelected ? "white" : "", margin: 0, backgroundColor: isSelected ? "#f80759" : "white" }}
+        style={{
+          color: isSelected ? "white" : "",
+          margin: 0,
+          backgroundColor: isSelected ? "#f80759" : "white",
+          border: "1px solid #CACFD2"
+        }}
       >
         {formatTableHeader(label)}
       </h6>
@@ -74,8 +79,11 @@ const Styles = {
     justifyContent: "center",
     alignItems: "center",
     height: "3em",
-    backgroundColor: "#D6F1F3",
-    color: "#282c34"
+    // backgroundColor: "#D6F1F3",
+    color: "#282c34",
+    position: "absolute",
+    zIndex: 10,
+    top: "5em"
   }
 };
 

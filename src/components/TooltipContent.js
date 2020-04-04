@@ -1,11 +1,19 @@
 import React from "react";
+import {formatTableHeader} from "../utils/functions"
 
 const TooltipContent = props => {
   const {title, label, data, details} = props.content;
+  const formatLabel = label => {
+    if (label) {
+      return formatTableHeader(label);
+    }
+    return;
+  }
+ 
   return (
     <div>
       <h3 style={Styles.line}>{title}</h3>
-      <p style={Styles.line}>{label}</p>
+      <p style={Styles.line}>{formatLabel(label)}</p>
       <h4 style={Styles.line}>{data}</h4>
       {details && <h5 style={Styles.line}>{details}</h5>}
     </div>

@@ -1,12 +1,25 @@
 import React from "react";
-import {formatDate} from "../utils/functions";
-import TopMenu from "./TopMenu";
+import {formatDate, setSectionTitle} from "../utils/functions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChartBar, faChartLine, faGlobeEurope } from "@fortawesome/free-solid-svg-icons";
+import { faChartBar, faChartLine, faGlobeEurope, faTable } from "@fortawesome/free-solid-svg-icons";
+
 
 const TitleSection = props => {
-  const { latestDataDate, goToChronWithoutCountrySelected } = props;
+  const { latestDataDate, goToChronWithoutCountrySelected, changePage, showingNow } = props;
   const date = formatDate(latestDataDate);
+  const highlightColor = "white";
+  const nonHighlightedColor = "#D7BDE2";
+  const isPageCurrentlyVisited = pageName => {
+    return showingNow === pageName;
+  }
+
+  const handleClick = pageName => {
+    if (isPageCurrentlyVisited(pageName)) {
+      return;
+    }
+    changePage(pageName);
+  }
+
   return (
     <div
       style={{
@@ -17,22 +30,57 @@ const TitleSection = props => {
       }}
     >
       <div id="title">
-        <h2 style={Styles.margin}>{`#COVID19 update`}</h2>
-        <h5>{`Latest data available: ${date}`}</h5>
+        <h3 style={Styles.margin}>{`#COVID19 update`}</h3>
+        <h6 style={Styles.margin}>{`Latest data: ${date}`}</h6>
       </div>
+      <h2>-- {setSectionTitle(showingNow).toUpperCase()} --</h2>
       <div>
         <FontAwesomeIcon
           icon={faGlobeEurope}
-          style={{ ...Styles.icon, ...Styles.iconMargin }}
+          style={{
+            ...Styles.icon,
+            ...Styles.iconMargin,
+            color: isPageCurrentlyVisited("worldMap")
+              ? highlightColor
+              : nonHighlightedColor
+          }}
+          size="2x"
+          onClick={() => handleClick("worldMap")}
+        />
+        <FontAwesomeIcon
+          icon={faChartLine}
+          style={{
+            ...Styles.icon,
+            ...Styles.iconMargin,
+            color: isPageCurrentlyVisited("chronologicalData")
+              ? highlightColor
+              : nonHighlightedColor
+          }}
           size="2x"
           onClick={goToChronWithoutCountrySelected}
         />
         <FontAwesomeIcon
-          icon={faChartLine}
-          style={{ ...Styles.icon, ...Styles.iconMargin }}
+          icon={faChartBar}
+          style={{
+            ...Styles.icon,
+            ...Styles.iconMargin,
+            color: isPageCurrentlyVisited("chartBar")
+              ? highlightColor
+              : nonHighlightedColor
+          }}
           size="2x"
         />
-        <FontAwesomeIcon icon={faChartBar} style={Styles.icon} size="2x" />
+        <FontAwesomeIcon
+          icon={faTable}
+          style={{
+            ...Styles.icon,
+            color: isPageCurrentlyVisited("tableData")
+              ? highlightColor
+              : nonHighlightedColor
+          }}
+          size="2x"
+          onClick={() => handleClick("tableData")}
+        />
       </div>
     </div>
   );
@@ -40,32 +88,27 @@ const TitleSection = props => {
 
 const Header = (props) => {
   const {
-    dataParameter,
-    changeParameter,
-    showingNow,
     latestDataDate,
-    goToChronWithoutCountrySelected
+    goToChronWithoutCountrySelected, 
+    changePage, 
+    showingNow
   } = props;
   
   return (
     <header>
       <TitleSection
         latestDataDate={latestDataDate}
+        changePage={changePage}
         goToChronWithoutCountrySelected={goToChronWithoutCountrySelected}
+        showingNow={showingNow}
       />
-      {showingNow === "worldMap" && (
-        <TopMenu
-          dataParameter={dataParameter}
-          changeParameter={changeParameter}
-        />
-      )}
     </header>
   );
 }
 
 const Styles = {
   margin: {
-    marginRight: 30
+    margin: 0
   },
   icon: {
     cursor: "pointer",

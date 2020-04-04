@@ -1,10 +1,10 @@
 import React from 'react';
 import './App.css';
 import Header from "./components/Header";
-import WorldMap from "./components/WorldMap";
-import Table from "./components/Table";
+import WorldMap from "./pages/WorldMap";
+import Table from "./pages/Table";
 import SummaryBox from "./components/SummaryBox";
-import ScatterPlot from "./components/ScatterPlot";
+import ScatterPlot from "./pages/ScatterPlot";
 import { feature } from "topojson-client";
 import Spinner from "./components/Spinner";
 import {useDataMassaging} from "./utils/useDataMassaging";
@@ -31,20 +31,19 @@ function App() {
   // React.useEffect(() => console.log("NOCOUNTRY?", noCountrySelected), [noCountrySelected]);
   const goToChronWithoutCountrySelected = () => {
     setNoCountrySelected(true);
-    showChronologicalData();
+    changePage("chronologicalData");
   }
 
-  const nowShowACountry = () => {
+  const goToChronWithCountrySelected = () => {
     setNoCountrySelected(false);
-    // showChronologicalData();
-  }
+    // changePage("chronologicalData");
+  };
 
 
   React.useEffect(() => {
     if (chronVirusData) {
       const reference = chronVirusData[0].totalCases;
       const lastDataDate = reference[reference.length - 1].date;
-      console.log("LAST DAY AVAILABLE", lastDataDate);
       setLatestDataDate(lastDataDate);
     }
   }, [chronVirusData])
@@ -115,16 +114,13 @@ function App() {
 
   const prepareCountryChronologicalData = countryName => {
     setCountryChronologicalData(countryName);
-    showChronologicalData();
+    changePage("chronologicalData");
   }
 
-  const showMap = () => {
-    setShowingNow("worldMap");
+  const changePage = pageName => {
+    setShowingNow(pageName);
   }
 
-  const showChronologicalData = () => {
-    setShowingNow("chronologicalData");
-  }
 
 
   if (data.length < 1) {
@@ -134,11 +130,11 @@ function App() {
   return (
     <div className="App">
       <Header
-        dataParameter={dataParameter}
-        changeParameter={changeParameter}
         showingNow={showingNow}
         latestDataDate={latestDataDate}
+        changePage={changePage}
         goToChronWithoutCountrySelected={goToChronWithoutCountrySelected}
+        showingNow={showingNow}
       />
       {showingNow === "worldMap" && (
         <main id="main-section">
@@ -157,18 +153,20 @@ function App() {
             noMoreShowingWorldData={noMoreShowingWorldData}
             indexGeographySelected={indexGeographySelected}
             highlightCountry={highlightCountry}
+            dataParameter={dataParameter}
+            changeParameter={changeParameter}
           />
         </main>
       )}
       {showingNow === "chronologicalData" && (
         <ScatterPlot
           country={countryChronologicalData}
-          showMap={showMap}
+          changePage={changePage}
           noCountrySelected={noCountrySelected}
-          nowShowACountry={nowShowACountry}
+          goToChronWithCountrySelected={goToChronWithCountrySelected}
         />
       )}
-      {showingNow === "worldMap" && (
+      {showingNow === "tableData" && (
         <Table
           virusData={virusData}
           prepareCountryChronologicalData={prepareCountryChronologicalData}

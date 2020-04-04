@@ -7,6 +7,22 @@ export const formatDate = (date = new Date()) => {
   return `${day}.${month}.${year}`;
 }
 
+export const setSectionTitle = showingNow => {
+  switch (showingNow) {
+    case "worldMap":
+      return "World Overview";
+
+    case "chronologicalData":
+      return "Chronological Data & Comparison";
+
+    case "tableData":
+      return "World table Data";
+
+    default:
+      break;
+  }
+}
+
 export const sortTableData = (key, array, shouldInvert = false) => {
   if (key === "country") {
     return [...array].sort((a, b) => {
@@ -305,6 +321,6 @@ export const getWorldTotalsHopkinsData = allData => {
   totals.recovered = worldRecovered;
   totals.newRecovered = worldRecovered - recoveredDayBefore;
 
-  console.log("TOT OBJECT", totals);
+  // console.log("TOT OBJECT", totals);
   return totals;
 };

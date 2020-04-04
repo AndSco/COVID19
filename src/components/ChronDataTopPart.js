@@ -111,7 +111,7 @@ const ChronDataTopPart = props => {
     currentData,
     topic,
     changeTopic,
-    showMap,
+    changePage,
     removeCountryData,
     switchChronologicalComparison, 
     isShowingFromDayOne, 
@@ -147,7 +147,7 @@ const ChronDataTopPart = props => {
             icon={faArrowCircleLeft}
             size="2x"
             style={{ cursor: "pointer" }}
-            onClick={showMap}
+            onClick={() => changePage("worldMap")}
           />
           <TopMenu
             topic={topic}
@@ -171,9 +171,28 @@ const ChronDataTopPart = props => {
       >
         {currentData &&
           currentData.map((entryShowing, index) => (
-            <CountryLabel entryShowing={entryShowing} index={index} key={index} currentData={currentData} removeCountryData={removeCountryData} />
-        ))}
-        {currentData && <div style={Styles.headerContainer} onClick={openCountryList}><FontAwesomeIcon icon={faPlus}color="grey" /><h5 style={{ ...Styles.countryHeader, color: "grey", cursor: "pointer" }}>Add country</h5></div>}
+            <CountryLabel
+              entryShowing={entryShowing}
+              index={index}
+              key={index}
+              currentData={currentData}
+              removeCountryData={removeCountryData}
+            />
+          ))}
+        {currentData && (
+          <div style={Styles.headerContainer} onClick={openCountryList}>
+            <FontAwesomeIcon icon={faPlus} color="grey" />
+            <h5
+              style={{
+                ...Styles.countryHeader,
+                color: "grey",
+                cursor: "pointer"
+              }}
+            >
+              Add country
+            </h5>
+          </div>
+        )}
       </div>
     </div>
   );

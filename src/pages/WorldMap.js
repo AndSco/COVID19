@@ -1,9 +1,10 @@
 import React from "react";
 import * as d3 from "d3";
 import { geoEqualEarth, geoPath } from "d3-geo";
-import TooltipContent from "./TooltipContent";
+import TooltipContent from "../components/TooltipContent";
 import MouseTooltip from "react-sticky-mouse-tooltip";
 import useWindowDimensions from "../utils/useWindowDimensions";
+import MapTopMenu from "../components/TopMenu";
 
 
 const projection = geoEqualEarth()
@@ -22,7 +23,8 @@ const WorldMap = props => {
     changeSummaryData,
     noMoreShowingWorldData,
     indexGeographySelected,
-    highlightCountry
+    highlightCountry, 
+    changeParameter
   } = props;
 
   // ZOOM
@@ -92,9 +94,13 @@ const WorldMap = props => {
       >
         <TooltipContent content={tooltipContent} />
       </MouseTooltip>
+      <MapTopMenu
+        dataParameter={dataParameter}
+        changeParameter={changeParameter}
+      />
       <svg
         width={`${width}px`}
-        height={`${height * 0.85}px`}
+        height={`${height * 0.90}px`}
         viewBox="0 0 800 450"
         id="svg-map"
       >
