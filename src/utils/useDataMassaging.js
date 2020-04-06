@@ -143,10 +143,16 @@ export const useDataMassaging = () => {
           };
         });
 
-        // console.log("country names", finalDataWithRightCountryNames);
+        console.log("country names", finalDataWithRightCountryNames);
+
+        //Remove the 2 cruiseliners 
+        const dataWithoutCruiseLiners = finalDataWithRightCountryNames.filter(entry => entry.country !== "Diamond Princess" && entry.country !== "MS Zaandam");
+        
+
+        console.log("NO CRUISE", dataWithoutCruiseLiners);
 
         //Adds population in millions and active cases + deats / 1million
-        finalDataWithRightCountryNames.map(entry => {
+        dataWithoutCruiseLiners.map(entry => {
           const foundEntry = populationData.filter(
             country => country.country === entry.country
           )[0];
@@ -171,23 +177,25 @@ export const useDataMassaging = () => {
             };
           });
 
-
           entry.recoveredMillPop = entry.recovered.map(entry => {
             return {
               date: entry.date,
               cases: +(entry.cases / population).toFixed(2),
               daySinceBeginning: entry.daySinceBeginning
             };
-          })
+          });
 
           entry.dailyDeaths = entry.totalCases.map(totalEntry => {
-            const sameDay = entry.deaths.find(deathEntry => deathEntry.date.getTime() === totalEntry.date.getTime());
+            const sameDay = entry.deaths.find(
+              deathEntry =>
+                deathEntry.date.getTime() === totalEntry.date.getTime()
+            );
 
             return {
               date: totalEntry.date,
-              cases: sameDay ? sameDay.cases : 0, 
+              cases: sameDay ? sameDay.cases : 0,
               daySinceBeginning: totalEntry.daySinceBeginning
-            };       
+            };
           });
 
           entry.dailyRecovered = entry.totalCases.map(totalEntry => {
@@ -204,15 +212,19 @@ export const useDataMassaging = () => {
           });
 
           entry.activeCases = entry.totalCases.map(totalEntry => {
-            const deathsToSubtract = entry.dailyDeaths.find(val => val.date === totalEntry.date).cases;
-            const recoveredToSubtract = entry.dailyRecovered.find(val => val.date === totalEntry.date).cases;
+            const deathsToSubtract = entry.dailyDeaths.find(
+              val => val.date === totalEntry.date
+            ).cases;
+            const recoveredToSubtract = entry.dailyRecovered.find(
+              val => val.date === totalEntry.date
+            ).cases;
             // console.log("-Deaths", deathsToSubtract, "-Recovered", recoveredToSubtract);
             return {
               date: totalEntry.date,
               cases: totalEntry.cases - deathsToSubtract - recoveredToSubtract,
               daySinceBeginning: totalEntry.daySinceBeginning
             };
-          })
+          });
 
           entry.activeCasesMillPop = entry.activeCases.map(entry => {
             return {
@@ -220,7 +232,7 @@ export const useDataMassaging = () => {
               cases: +(entry.cases / population).toFixed(2),
               daySinceBeginning: entry.daySinceBeginning
             };
-          })
+          });
 
           entry.newActiveCases = getNewCases(entry, "activeCases");
 
@@ -231,7 +243,7 @@ export const useDataMassaging = () => {
           return entry;
         });
 
-        setAllChronologicalData(finalDataWithRightCountryNames);
+        setAllChronologicalData(dataWithoutCruiseLiners);
       });
     };
 

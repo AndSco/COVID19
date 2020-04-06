@@ -18,8 +18,11 @@ export const setSectionTitle = showingNow => {
     case "tableData":
       return "World table Data";
 
+    case "chartBar":
+      return "10 most affected countries";
+
     default:
-      break;
+      return showingNow;
   }
 }
 
@@ -34,18 +37,12 @@ export const sortTableData = (key, array, shouldInvert = false) => {
       }
       return 0;
     });
-  } else if (key === "Date of 1st case") {
-    return [...array].sort((a, b) => {
-      if (new Date(`${a[key]} 2020`) > new Date(`${b[key]} 2020`)) {
-        return shouldInvert ? -1 : 1;
-      }
-      if (new Date(`${a[key]} 2020`) < new Date(`${b[key]} 2020`)) {
-        return shouldInvert ? 1 : -1;
-      }
-      return 0;
-    });
   } else {
     return [...array].sort((a, b) => {
+      if (isNaN(a[key])) {
+        console.log("GOT IT");
+        return 1;
+      }
       if (a[key] < b[key]) {
         return shouldInvert ? -1 : 1;
       }

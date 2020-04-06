@@ -5,6 +5,7 @@ import WorldMap from "./pages/WorldMap";
 import Table from "./pages/Table";
 import SummaryBox from "./components/SummaryBox";
 import ScatterPlot from "./pages/ScatterPlot";
+import BarChart from "./pages/BarChart";
 import { feature } from "topojson-client";
 import Spinner from "./components/Spinner";
 import {useDataMassaging} from "./utils/useDataMassaging";
@@ -147,7 +148,6 @@ function App() {
           <WorldMap
             data={data}
             geographies={geographies}
-            dataParameter={dataParameter}
             changeSummaryData={changeSummaryData}
             resetSummaryData={resetSummaryData}
             noMoreShowingWorldData={noMoreShowingWorldData}
@@ -172,6 +172,9 @@ function App() {
           prepareCountryChronologicalData={prepareCountryChronologicalData}
         />
       )}
+      {showingNow === "chartBar" && 
+        <BarChart data={virusData} dataParameter={dataParameter} changeParameter={changeParameter} />
+      }
     </div>
   );
 }

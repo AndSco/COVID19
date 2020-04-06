@@ -42,7 +42,8 @@ const TitleSection = props => {
             ...Styles.iconMargin,
             color: isPageCurrentlyVisited("worldMap")
               ? highlightColor
-              : nonHighlightedColor
+              : nonHighlightedColor,
+            cursor: isPageCurrentlyVisited("worldMap") ? "auto" : "pointer"
           }}
           size="2x"
           onClick={() => handleClick("worldMap")}
@@ -54,7 +55,10 @@ const TitleSection = props => {
             ...Styles.iconMargin,
             color: isPageCurrentlyVisited("chronologicalData")
               ? highlightColor
-              : nonHighlightedColor
+              : nonHighlightedColor,
+            cursor: isPageCurrentlyVisited("chronologicalData")
+              ? "auto"
+              : "pointer"
           }}
           size="2x"
           onClick={goToChronWithoutCountrySelected}
@@ -66,9 +70,11 @@ const TitleSection = props => {
             ...Styles.iconMargin,
             color: isPageCurrentlyVisited("chartBar")
               ? highlightColor
-              : nonHighlightedColor
+              : nonHighlightedColor,
+            cursor: isPageCurrentlyVisited("chartBar") ? "auto" : "pointer"
           }}
           size="2x"
+          onClick={() => handleClick("chartBar")}
         />
         <FontAwesomeIcon
           icon={faTable}
@@ -76,7 +82,8 @@ const TitleSection = props => {
             ...Styles.icon,
             color: isPageCurrentlyVisited("tableData")
               ? highlightColor
-              : nonHighlightedColor
+              : nonHighlightedColor,
+            cursor: isPageCurrentlyVisited("tableData") ? "auto" : "pointer"
           }}
           size="2x"
           onClick={() => handleClick("tableData")}
@@ -111,7 +118,6 @@ const Styles = {
     margin: 0
   },
   icon: {
-    cursor: "pointer",
     color: "white"
   },
   iconMargin: {

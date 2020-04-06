@@ -64,6 +64,10 @@ export default [
     population: "395361"
   },
   {
+    country: "Bahamas",
+    population: "395361"
+  },
+  {
     country: "Bahrain",
     population: "1492584"
   },
@@ -134,6 +138,10 @@ export default [
   {
     country: "Burkina Faso",
     population: "19193382"
+  },
+  {
+    country: "Burma",
+    population: "16005373"
   },
   {
     country: "Burundi",
@@ -224,6 +232,10 @@ export default [
     population: "5733551"
   },
   {
+    country: "Diamond Princess",
+    population: "3711"
+  },
+  {
     country: "Djibouti",
     population: "956985"
   },
@@ -266,6 +278,10 @@ export default [
   {
     country: "Estonia",
     population: "1309632"
+  },
+  {
+    country: "Eswatini",
+    population: "1136281"
   },
   {
     country: "Ethiopia",
@@ -852,6 +868,10 @@ export default [
     population: "18269868"
   },
   {
+    country: "Taiwan",
+    population: "23806627"
+  },
+  {
     country: "Tajikistan",
     population: "8921343"
   },
@@ -966,6 +986,10 @@ export default [
   {
     country: "Wallis and Futuna",
     population: "11773"
+  },
+  {
+    country: "West Bank and Gaza",
+    population: "4685000"
   },
   {
     country: "Western Sahara",

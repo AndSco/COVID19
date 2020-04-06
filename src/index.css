@@ -11,6 +11,13 @@ body {
   /* display: flex; */
 }
 
+.page {
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 header {
   background: #bc4e9c;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to right, #f80759, #bc4e9c);  /* Chrome 10-25, Safari 5.1-6 */
@@ -249,10 +256,6 @@ tbody tr:hover {
   #top-menu {
     flex-wrap: wrap;
     padding-bottom: 1em;
-  }
-
-  .menu-item {
-    width: 50%;
   }
 
   #main-section {

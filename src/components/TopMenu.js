@@ -12,7 +12,8 @@ const MenuItem = props => {
           color: isSelected ? "white" : "",
           margin: 0,
           backgroundColor: isSelected ? "#f80759" : "white",
-          border: "1px solid #CACFD2"
+          border: "1px solid #CACFD2", 
+          maxWidth: 120
         }}
       >
         {formatTableHeader(label)}
