@@ -3,6 +3,53 @@ import {formatDate, setSectionTitle} from "../utils/functions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChartBar, faChartLine, faGlobeEurope, faTable } from "@fortawesome/free-solid-svg-icons";
 
+const IconButton = props => {
+  const {
+    isPageCurrentlyVisited,
+    handleClick,
+    title,
+    pageName,
+    icon,
+    needsMargin,
+    goToChronWithoutCountrySelected
+  } = props;
+  const highlightColor = "white";
+  const nonHighlightedColor = "#D7BDE2";
+
+  const currentColor = isPageCurrentlyVisited(pageName)
+          ? highlightColor
+          : nonHighlightedColor;
+
+  return (
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        marginRight: needsMargin ? "1.3em" : 0,
+        color: currentColor, 
+        // paddingRight: needsMargin ? ".8em" : 0,
+        // borderRight: needsMargin ? "1px solid" : "none"
+      }}
+    >
+      <h6 style={{ margin: 0 }}>{title}</h6>
+      <FontAwesomeIcon
+        icon={icon}
+        style={{
+          ...Styles.icon,
+          color: currentColor,
+          cursor: isPageCurrentlyVisited(pageName) ? "auto" : "pointer"
+        }}
+        onClick={() =>
+          goToChronWithoutCountrySelected
+            ? goToChronWithoutCountrySelected()
+            : handleClick(pageName)
+        }
+      />
+    </div>
+  );
+}
+
 
 const TitleSection = props => {
   const { latestDataDate, goToChronWithoutCountrySelected, changePage, showingNow } = props;
@@ -35,59 +82,37 @@ const TitleSection = props => {
         <h6 style={Styles.margin}>{`Latest data: ${date}`}</h6>
       </div>
       <h2>-- {setSectionTitle(showingNow).toUpperCase()} --</h2>
-      <div>
-        <FontAwesomeIcon
+      <div style={{ display: "flex" }}>
+        <IconButton
           icon={faGlobeEurope}
-          style={{
-            ...Styles.icon,
-            ...Styles.iconMargin,
-            color: isPageCurrentlyVisited("worldMap")
-              ? highlightColor
-              : nonHighlightedColor,
-            cursor: isPageCurrentlyVisited("worldMap") ? "auto" : "pointer"
-          }}
-          size="2x"
-          onClick={() => handleClick("worldMap")}
+          pageName={"worldMap"}
+          isPageCurrentlyVisited={isPageCurrentlyVisited}
+          handleClick={handleClick}
+          title="MAP"
+          needsMargin={true}
         />
-        <FontAwesomeIcon
+        <IconButton
           icon={faChartLine}
-          style={{
-            ...Styles.icon,
-            ...Styles.iconMargin,
-            color: isPageCurrentlyVisited("chronologicalData")
-              ? highlightColor
-              : nonHighlightedColor,
-            cursor: isPageCurrentlyVisited("chronologicalData")
-              ? "auto"
-              : "pointer"
-          }}
-          size="2x"
-          onClick={goToChronWithoutCountrySelected}
+          pageName={"chronologicalData"}
+          isPageCurrentlyVisited={isPageCurrentlyVisited}
+          goToChronWithoutCountrySelected={goToChronWithoutCountrySelected}
+          title="GROWTH"
+          needsMargin={true}
         />
-        <FontAwesomeIcon
+        <IconButton
           icon={faChartBar}
-          style={{
-            ...Styles.icon,
-            ...Styles.iconMargin,
-            color: isPageCurrentlyVisited("chartBar")
-              ? highlightColor
-              : nonHighlightedColor,
-            cursor: isPageCurrentlyVisited("chartBar") ? "auto" : "pointer"
-          }}
-          size="2x"
-          onClick={() => handleClick("chartBar")}
+          pageName={"chartBar"}
+          isPageCurrentlyVisited={isPageCurrentlyVisited}
+          handleClick={handleClick}
+          title="TOP-20"
+          needsMargin={true}
         />
-        <FontAwesomeIcon
+        <IconButton
           icon={faTable}
-          style={{
-            ...Styles.icon,
-            color: isPageCurrentlyVisited("tableData")
-              ? highlightColor
-              : nonHighlightedColor,
-            cursor: isPageCurrentlyVisited("tableData") ? "auto" : "pointer"
-          }}
-          size="2x"
-          onClick={() => handleClick("tableData")}
+          pageName={"tableData"}
+          isPageCurrentlyVisited={isPageCurrentlyVisited}
+          handleClick={handleClick}
+          title="TABLE"
         />
       </div>
     </div>
