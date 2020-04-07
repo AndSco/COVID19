@@ -23,8 +23,9 @@ const WorldMap = props => {
     changeSummaryData,
     noMoreShowingWorldData,
     indexGeographySelected,
-    highlightCountry, 
-    changeParameter
+    highlightCountry,
+    changeParameter,
+    resetSummaryData
   } = props;
 
   // ZOOM
@@ -41,6 +42,10 @@ const WorldMap = props => {
         })
     );
   });
+
+  React.useEffect(() => {
+    resetSummaryData();
+  }, []);
 
   const showTooltip = () => {
     setIsTooltipVisible(true);

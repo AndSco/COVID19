@@ -16,7 +16,8 @@ const ScatterPlot = props => {
     country,
     changePage,
     noCountrySelected,
-    goToChronWithCountrySelected
+    goToChronWithCountrySelected, 
+    goHome
   } = props;
   const [countriesSelected, setCountriesSelected] = React.useState([country]);
   const allChronologicalData = useDataMassaging();
@@ -222,9 +223,15 @@ const ScatterPlot = props => {
               details:
                 i === 0
                   ? `+${d.cases} from day before`
-                  : `+${differenceFromDayBefore} from day before (+${(
-                      differenceFromDayBefore / d.cases
-                    ).toFixed(2)}%)`
+                  : `${
+                      differenceFromDayBefore > 0
+                        ? "+" + differenceFromDayBefore
+                        : differenceFromDayBefore
+                    } from day before (${
+                      differenceFromDayBefore > 0
+                        ? "+" + (differenceFromDayBefore / d.cases).toFixed(2)
+                        : (differenceFromDayBefore / d.cases).toFixed(2)
+                    }%)`
             });
           })
           .on("mouseout", () => {
@@ -273,6 +280,7 @@ const ScatterPlot = props => {
           closeCountryList={closeCountryList}
           noCountrySelected={noCountrySelected}
           goToChronWithCountrySelected={goToChronWithCountrySelected}
+          goHome={goHome}
         />
       )}
       <div ref={svgContainer}></div>

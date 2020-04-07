@@ -94,6 +94,10 @@ function App() {
     setDataParameter(parameter);
   }
 
+  const goHome = () => {
+    setShowingNow("worldMap");
+  }
+
   
   const changeSummaryData = obj => {
     setSummaryData(obj);
@@ -155,6 +159,7 @@ function App() {
             highlightCountry={highlightCountry}
             dataParameter={dataParameter}
             changeParameter={changeParameter}
+            resetSummaryData={resetSummaryData}
           />
         </main>
       )}
@@ -164,6 +169,7 @@ function App() {
           changePage={changePage}
           noCountrySelected={noCountrySelected}
           goToChronWithCountrySelected={goToChronWithCountrySelected}
+          goHome={goHome}
         />
       )}
       {showingNow === "tableData" && (
@@ -172,9 +178,13 @@ function App() {
           prepareCountryChronologicalData={prepareCountryChronologicalData}
         />
       )}
-      {showingNow === "chartBar" && 
-        <BarChart data={virusData} dataParameter={dataParameter} changeParameter={changeParameter} />
-      }
+      {showingNow === "chartBar" && (
+        <BarChart
+          data={virusData}
+          dataParameter={dataParameter}
+          changeParameter={changeParameter}
+        />
+      )}
     </div>
   );
 }

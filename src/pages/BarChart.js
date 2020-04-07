@@ -6,17 +6,11 @@ import useWindowDimensions from "../utils/useWindowDimensions";
 
 const BarChart = props => {
   const {data, dataParameter, changeParameter} = props;
-  const [isTooltipVisible, setIsTooltipVisible] = React.useState(false);
-  const [tooltipContent, setTooltipContent] = React.useState("");
   const {width, height} = useWindowDimensions();
   const svgWidth = width / 1.2;
   const svgHeight = height / 1.3;
   const svgMargin = 90;
   const svgContainer = React.useRef();
-
-
-  React.useEffect(() => console.log("tooltip?", isTooltipVisible), [isTooltipVisible])
-  React.useEffect(() => console.log("tooltip content?", tooltipContent), [tooltipContent.title]);
 
   const currentData = data.map(entry => ({
       country: entry.country,

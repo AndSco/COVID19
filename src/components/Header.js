@@ -30,6 +30,7 @@ const TitleSection = props => {
       }}
     >
       <div id="title">
+        {/* <FontAwesomeIcon icon={faVirus} /> */}
         <h3 style={Styles.margin}>{`#COVID19 update`}</h3>
         <h6 style={Styles.margin}>{`Latest data: ${date}`}</h6>
       </div>

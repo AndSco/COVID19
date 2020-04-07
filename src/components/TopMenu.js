@@ -84,7 +84,7 @@ const Styles = {
     color: "#282c34",
     position: "absolute",
     zIndex: 10,
-    top: "5em"
+    top: "4.7em"
   }
 };
 
