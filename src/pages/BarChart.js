@@ -3,14 +3,20 @@ import TopMenu from "../components/TopMenu";
 import * as d3 from "d3";
 import useWindowDimensions from "../utils/useWindowDimensions";
 
+
 const BarChart = props => {
   const {data, dataParameter, changeParameter} = props;
-  console.log("DATAPARAM", dataParameter);
+  const [isTooltipVisible, setIsTooltipVisible] = React.useState(false);
+  const [tooltipContent, setTooltipContent] = React.useState("");
   const {width, height} = useWindowDimensions();
   const svgWidth = width / 1.2;
   const svgHeight = height / 1.3;
   const svgMargin = 90;
   const svgContainer = React.useRef();
+
+
+  React.useEffect(() => console.log("tooltip?", isTooltipVisible), [isTooltipVisible])
+  React.useEffect(() => console.log("tooltip content?", tooltipContent), [tooltipContent.title]);
 
   const currentData = data.map(entry => ({
       country: entry.country,
@@ -20,16 +26,16 @@ const BarChart = props => {
     a.cases < b.cases ? 1 
     : a.cases > b.cases ? -1
     : 0
-  ).slice(0, 30);
+  ).slice(0, 20);
 
-  console.log("DATA", currentData);
+  // console.log("DATA", currentData);
 
   const allCases = currentData.map(entry => entry.cases);
   const maxCases = d3.max(allCases);
   
   const countries = currentData.map(entry => entry.country);
 
-  console.log("Countries", countries);
+  // console.log("Countries", countries);
 
   const xScale = d3
     .scaleBand()
@@ -78,22 +84,51 @@ const BarChart = props => {
         .selectAll("rect")
         .data(currentData)
         .enter()
-        .append("rect")
-        .attr("x", d => xScale(d.country))
-        .attr("y", d => yScale(d.cases))
-        .attr("width", xScale.bandwidth())
-        .attr("height", d => svgHeight - yScale(d.cases) - svgMargin)
-        .attr("fill", "#AF7AC5");
+        .append("g")
+          .attr("class", "rectangle")
+          .append("rect")
+            .attr("x", d => xScale(d.country))
+            .attr("y", d => yScale(d.cases))
+            .attr("width", xScale.bandwidth())
+            .attr("height", d => svgHeight - yScale(d.cases) - svgMargin)
+            .attr("fill", "#AF7AC5")
+      
 
+        d3.selectAll(".rectangle")
+          .append("text")
+          .attr("fill", "white")
+          .attr("font-size", ".7em")
+          .attr(
+            "transform",
+            (d, i) =>
+              `translate(${xScale(d.country) + 20} , ${yScale(d.cases) -
+                8}), rotate(-90)`
+          )
+          .text(d => d.cases)
+      
     }
   }, [currentData])
   
   return (
-    <div id="barchart-page" className="page"> 
-      <TopMenu dataParameter={dataParameter} changeParameter={changeParameter} />
+    <div id="barchart-page" className="page">
+      <TopMenu
+        dataParameter={dataParameter}
+        changeParameter={changeParameter}
+      />
       <div ref={svgContainer}></div>
-    </div>  
-  )
+    </div>
+  );
 }
+
+const Styles = {
+  tooltip: {
+    padding: ".6em 1em",
+    backgroundColor: "white",
+    borderRadius: "10%",
+    color: "#282c34",
+    border: "2px solid #282c34",
+    fontSize: ".7em"
+  }
+};
 
 export default BarChart;

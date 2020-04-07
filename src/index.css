@@ -15,7 +15,11 @@ body {
   height: 90vh;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-end;
+}
+
+text {
+  font-family: 'Rubik', sans-serif;
 }
 
 header {

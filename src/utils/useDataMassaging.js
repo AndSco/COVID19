@@ -39,10 +39,10 @@ const getLatestDataForACountry = countryObj => {
 
   const {newActiveCases, newDeaths, country} = countryObj;
   latestData.country = country;
-  
 
   keys.map(key => {
     latestData[key] = getLatestDataByKey(key);
+    return latestData[key];
   });
   
   latestData.newActiveCases = newActiveCases;

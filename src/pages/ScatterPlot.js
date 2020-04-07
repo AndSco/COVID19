@@ -155,7 +155,7 @@ const ScatterPlot = props => {
         .range([height - padding.top * 2, padding.bottom * 2]);
 
       const yAxis = d3.axisLeft(yScale)
-        .ticks(5);
+        // .ticks(5);
 
       const svgBox = d3.select(svgContainer.current);
 

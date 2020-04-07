@@ -19,7 +19,7 @@ export const setSectionTitle = showingNow => {
       return "World table Data";
 
     case "chartBar":
-      return "10 most affected countries";
+      return "Top 20 countries";
 
     default:
       return showingNow;
