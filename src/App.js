@@ -139,7 +139,6 @@ function App() {
         latestDataDate={latestDataDate}
         changePage={changePage}
         goToChronWithoutCountrySelected={goToChronWithoutCountrySelected}
-        showingNow={showingNow}
       />
       {showingNow === "worldMap" && (
         <main id="main-section">
@@ -159,7 +158,6 @@ function App() {
             highlightCountry={highlightCountry}
             dataParameter={dataParameter}
             changeParameter={changeParameter}
-            resetSummaryData={resetSummaryData}
           />
         </main>
       )}

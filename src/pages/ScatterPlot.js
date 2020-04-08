@@ -55,7 +55,7 @@ const ScatterPlot = props => {
       });
       setDayCounts(allDays);
     }
-  }, [currentData]);
+  }, [currentData, topic]);
 
   // See absolute data or data / 1 mill pop
   const [showPerMillion, setShowPerMillion] = React.useState(false);
@@ -238,9 +238,10 @@ const ScatterPlot = props => {
             setTooltipContent("");
             setIsTooltipVisible(false);
           });
+        return svg;    
       });
     }
-  }, [currentData, country, topic, isShowingFromDayOne]);
+  }, [currentData, country, topic, isShowingFromDayOne, dayCounts, padding.bottom, padding.left, padding.right, padding.top, width]);
 
   if (!allChronologicalData) {
     return <Spinner />;

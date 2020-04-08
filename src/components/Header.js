@@ -28,8 +28,6 @@ const IconButton = props => {
         alignItems: "center",
         marginRight: needsMargin ? "1.3em" : 0,
         color: currentColor, 
-        // paddingRight: needsMargin ? ".8em" : 0,
-        // borderRight: needsMargin ? "1px solid" : "none"
       }}
     >
       <h6 style={{ margin: 0 }}>{title}</h6>
@@ -54,8 +52,6 @@ const IconButton = props => {
 const TitleSection = props => {
   const { latestDataDate, goToChronWithoutCountrySelected, changePage, showingNow } = props;
   const date = formatDate(latestDataDate);
-  const highlightColor = "white";
-  const nonHighlightedColor = "#D7BDE2";
   const isPageCurrentlyVisited = pageName => {
     return showingNow === pageName;
   }

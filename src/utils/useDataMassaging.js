@@ -248,7 +248,7 @@ export const useDataMassaging = () => {
     };
 
     fetchData();
-  }, []);
+  }, [createUniqueDataset, formatDataByCountry, makeIntegersOfChronologicalData]);
 
   return allChronologicalData;
 };

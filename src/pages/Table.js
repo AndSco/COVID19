@@ -24,7 +24,7 @@ const Table = props => {
   const {virusData} = props;
   const [isSortedBy, setIsSortedBy] = React.useState("totalCases");
   const [data, setData] = React.useState(sortTableData(isSortedBy, virusData));
-  const [wholeDataSet, setWholeDataSet] = React.useState(virusData);
+  const [wholeDataSet] = React.useState(virusData);
   const [isSortedMaxMin, setIsSortedMaxMin] = React.useState(true);
   const { prepareCountryChronologicalData } = props;
 

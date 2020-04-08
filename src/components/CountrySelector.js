@@ -1,6 +1,6 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {faTimesCircle, faHome} from "@fortawesome/free-solid-svg-icons";
+import {faTimesCircle, faArrowCircleLeft} from "@fortawesome/free-solid-svg-icons";
 
 
 const CountryLine = props => {
@@ -17,7 +17,6 @@ const CountryLine = props => {
   const updateCountriesSelected = countryName => {
     showDataForAnotherCountry(countryName);
     if (goToChronWithCountrySelected) {
-      console.log("now SHOW");
       goToChronWithCountrySelected();
     };
     closeCountryList();
@@ -77,11 +76,12 @@ const CountrySelector = props => {
         />
       ) : (
         <FontAwesomeIcon
-          icon={faHome}
+          icon={faArrowCircleLeft}
           size="2x"
           style={{ position: "fixed", top: 25, left: 35, cursor: "pointer" }}
           onClick={goHome}
-        />
+          color="#E5E7E9"
+        /> 
       )}
       <h2 style={{ color: "#FFFF00" }}>Choose a country to visualise data</h2>
       <input

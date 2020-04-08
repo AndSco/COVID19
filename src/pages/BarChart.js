@@ -101,7 +101,7 @@ const BarChart = props => {
           .text(d => d.cases)
       
     }
-  }, [currentData])
+  }, [currentData, svgHeight, svgWidth, xAxis, xScale, yAxis, yScale])
   
   return (
     <div id="barchart-page" className="page">
@@ -114,15 +114,5 @@ const BarChart = props => {
   );
 }
 
-const Styles = {
-  tooltip: {
-    padding: ".6em 1em",
-    backgroundColor: "white",
-    borderRadius: "10%",
-    color: "#282c34",
-    border: "2px solid #282c34",
-    fontSize: ".7em"
-  }
-};
 
 export default BarChart;
