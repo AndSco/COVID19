@@ -139,6 +139,7 @@ function App() {
         latestDataDate={latestDataDate}
         changePage={changePage}
         goToChronWithoutCountrySelected={goToChronWithoutCountrySelected}
+        goHome={goHome}
       />
       {showingNow === "worldMap" && (
         <main id="main-section">

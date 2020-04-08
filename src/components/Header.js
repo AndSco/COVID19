@@ -50,7 +50,7 @@ const IconButton = props => {
 
 
 const TitleSection = props => {
-  const { latestDataDate, goToChronWithoutCountrySelected, changePage, showingNow } = props;
+  const { latestDataDate, goToChronWithoutCountrySelected, changePage, showingNow, goHome } = props;
   const date = formatDate(latestDataDate);
   const isPageCurrentlyVisited = pageName => {
     return showingNow === pageName;
@@ -72,7 +72,7 @@ const TitleSection = props => {
         alignItems: "center"
       }}
     >
-      <div id="title">
+      <div id="title" onClick={goHome} style={{ cursor: "pointer" }}>
         {/* <FontAwesomeIcon icon={faVirus} /> */}
         <h3 style={Styles.margin}>{`#COVID19 update`}</h3>
         <h6 style={Styles.margin}>{`Latest data: ${date}`}</h6>
@@ -120,7 +120,8 @@ const Header = (props) => {
     latestDataDate,
     goToChronWithoutCountrySelected, 
     changePage, 
-    showingNow
+    showingNow, 
+    goHome
   } = props;
   
   return (
@@ -130,6 +131,7 @@ const Header = (props) => {
         changePage={changePage}
         goToChronWithoutCountrySelected={goToChronWithoutCountrySelected}
         showingNow={showingNow}
+        goHome={goHome}
       />
     </header>
   );
