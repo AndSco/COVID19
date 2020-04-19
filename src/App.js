@@ -11,6 +11,7 @@ import Spinner from "./components/Spinner";
 import {useDataMassaging} from "./utils/useDataMassaging";
 import topoData from "./assets/world-110m";
 import { getWorldTotalsHopkinsData } from "./utils/functions";
+import HistoricalPandemics from './pages/HistoricalPandemics';
 
 
 function App() {
@@ -23,7 +24,7 @@ function App() {
   const [dataParameter, setDataParameter] = React.useState("totalCases");
   const [isShowingWorldData, setIsShowingWorldData] = React.useState(true);
   const [indexGeographySelected, setIndexGeographySelected] = React.useState(null);
-  const [showingNow, setShowingNow] = React.useState("worldMap");
+  const [showingNow, setShowingNow] = React.useState("historicalPandemics");
   const [countryChronologicalData, setCountryChronologicalData] = React.useState(null);
   const [latestDataDate, setLatestDataDate] = React.useState(null);
   // For selecting chron section without a country selected yet
@@ -182,6 +183,11 @@ function App() {
           data={virusData}
           dataParameter={dataParameter}
           changeParameter={changeParameter}
+        />
+      )}
+      {showingNow === "historicalPandemics" && (
+        <HistoricalPandemics
+          covidDeaths={worldwideData ? worldwideData.deaths : undefined}
         />
       )}
     </div>

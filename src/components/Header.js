@@ -1,7 +1,8 @@
 import React from "react";
 import {formatDate, setSectionTitle} from "../utils/functions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChartBar, faChartLine, faGlobeEurope, faTable } from "@fortawesome/free-solid-svg-icons";
+import { faChartBar, faChartLine, faGlobeEurope, faTable, faSkullCrossbones } from "@fortawesome/free-solid-svg-icons";
+
 
 const IconButton = props => {
   const {
@@ -109,6 +110,14 @@ const TitleSection = props => {
           isPageCurrentlyVisited={isPageCurrentlyVisited}
           handleClick={handleClick}
           title="TABLE"
+          needsMargin={true}
+        />
+        <IconButton
+          icon={faSkullCrossbones}
+          pageName={"historicalPandemics"}
+          isPageCurrentlyVisited={isPageCurrentlyVisited}
+          handleClick={handleClick}
+          title="PANDEMICS"
         />
       </div>
     </div>

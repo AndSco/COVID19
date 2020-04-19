@@ -21,6 +21,9 @@ export const setSectionTitle = showingNow => {
     case "chartBar":
       return "Top 20 countries";
 
+    case "historicalPandemics":
+      return "Pandemics in history";
+
     default:
       return showingNow;
   }
@@ -320,4 +323,16 @@ export const getWorldTotalsHopkinsData = allData => {
 
   // console.log("TOT OBJECT", totals);
   return totals;
+};
+
+export const addCommas = num => {
+  num += ""; //convert it to string
+  var x = num.split(".");
+  var x1 = x[0];
+  var x2 = x.length > 1 ? "." + x[1] : "";
+  var rgx = /(\d+)(\d{3})/;
+  while (rgx.test(x1)) {
+    x1 = x1.replace(rgx, "$1" + "," + "$2");
+  }
+  return x1 + x2;
 };

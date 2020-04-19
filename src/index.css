@@ -256,6 +256,16 @@ tbody tr:hover {
   transform: scale(1.5);
 }
 
+
+/* historical pandemics */
+.pandemic-card {
+  /* background: -webkit-linear-gradient(to right, #f80759, #bc4e9c);
+  background: linear-gradient(to right, #f80759, #bc4e9c); */
+  /* background-image: url("https://images.unsplash.com/photo-1579492450119-80542d516179?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"); */
+  background: #282c34;
+  color: white;
+}
+
 @media only screen and (max-width:1000px) {
   #top-menu {
     flex-wrap: wrap;
