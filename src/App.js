@@ -24,7 +24,7 @@ function App() {
   const [dataParameter, setDataParameter] = React.useState("totalCases");
   const [isShowingWorldData, setIsShowingWorldData] = React.useState(true);
   const [indexGeographySelected, setIndexGeographySelected] = React.useState(null);
-  const [showingNow, setShowingNow] = React.useState("historicalPandemics");
+  const [showingNow, setShowingNow] = React.useState("worldMap");
   const [countryChronologicalData, setCountryChronologicalData] = React.useState(null);
   const [latestDataDate, setLatestDataDate] = React.useState(null);
   // For selecting chron section without a country selected yet
@@ -40,6 +40,10 @@ function App() {
     setNoCountrySelected(false);
     // changePage("chronologicalData");
   };
+
+  const resetChronCountrySelected = () => {
+    setCountryChronologicalData(null);
+  }
 
 
   React.useEffect(() => {
@@ -170,6 +174,7 @@ function App() {
           noCountrySelected={noCountrySelected}
           goToChronWithCountrySelected={goToChronWithCountrySelected}
           goHome={goHome}
+          resetChronCountrySelected={resetChronCountrySelected}
         />
       )}
       {showingNow === "tableData" && (

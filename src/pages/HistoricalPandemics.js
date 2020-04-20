@@ -346,7 +346,7 @@ const SideLine = props => {
 };
 
 const Selector = props => {
-  return <h4 style={{marginRight: "3em", cursor: "pointer"}} onClick={() => props.changeViewType(props.type)}>{props.name}</h4>;
+  return <h4 style={{marginRight: "3em", cursor: "pointer", color:props.showingNow === props.type ? "black" : "grey"}} onClick={() => props.changeViewType(props.type)}>{props.name}</h4>;
 }
 
 const Skull = props => {
@@ -386,7 +386,6 @@ const ChronologicalView = props => {
           width: "90%",
           flexWrap: "wrap",
           justifyContent: "center",
-          // padding: "50px"
         }}
       >
         {allPandemics.map(pandemic => {
@@ -542,11 +541,13 @@ const HistoricalPandemics = props => {
           name="BY NUMBER OF VICTIMS"
           changeViewType={changeViewType}
           type="victim"
+          showingNow={typeOfView}
         />
         <Selector
           name="CHRONOLOGICALLY"
           changeViewType={changeViewType}
           type="time"
+          showingNow={typeOfView}
         />
       </div>
       {typeOfView === "victim" ? (

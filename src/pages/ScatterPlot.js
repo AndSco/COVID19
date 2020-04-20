@@ -16,8 +16,9 @@ const ScatterPlot = props => {
     country,
     changePage,
     noCountrySelected,
-    goToChronWithCountrySelected, 
-    goHome
+    goToChronWithCountrySelected,
+    goHome,
+    resetChronCountrySelected
   } = props;
   const [countriesSelected, setCountriesSelected] = React.useState([country]);
   const allChronologicalData = useDataMassaging();
@@ -81,6 +82,7 @@ const ScatterPlot = props => {
       );
       setCurrentData(dataToSet);
     }
+    return () => resetChronCountrySelected(); //reset the chron country when leaving the section
   }, [allChronologicalData, countriesSelected]);
 
   const showDataForAnotherCountry = countryName => {
