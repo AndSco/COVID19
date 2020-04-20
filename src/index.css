@@ -261,6 +261,11 @@ tbody tr:hover {
 .pandemic-card {
   background: #282c34;
   color: white;
+  border: 2px solid white;
+}
+
+.pandemic-card:hover {
+  transform: scale(1.1);
 }
 
 @media only screen and (max-width:1000px) {

@@ -885,7 +885,7 @@ export default [
   },
   {
     country: "DR Congo",
-    population: "84068"
+    population: "84068000"
   },
   {
     country: "Republic of the Congo",
