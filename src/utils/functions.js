@@ -336,3 +336,48 @@ export const addCommas = num => {
   }
   return x1 + x2;
 };
+
+
+
+const filterHelper = (earliestTimeStamp, data) => {
+  return data.filter(item => item.date.getTime() >= earliestTimeStamp);
+}
+
+export const filterResultsByDate = (periodFrom, dataObject) => {
+  const filteredEntries = [];
+  dataObject.forEach(country => {
+    const {
+      activeCases,
+      activeCasesMillPop,
+      dailyDeaths,
+      dailyRecovered,
+      deaths,
+      deathsMillPop,
+      recovered,
+      recoveredMillPop,
+      totalCases,
+      totalCasesMillionPop
+    } = country;
+
+    const earliestTimeStamp =
+      periodFrom === "pastWeek"
+        ? new Date().getTime() - 604800000 - 86400000 // need to subtract one day (data is one day behind)
+        : new Date().getTime() - 2419200000 - 86400000;
+
+    filteredEntries.push({
+      ...country,
+      activeCases: filterHelper(earliestTimeStamp, activeCases),
+      activeCasesMillPop: filterHelper(earliestTimeStamp, activeCasesMillPop),
+      dailyDeaths: filterHelper(earliestTimeStamp, dailyDeaths),
+      dailyRecovered: filterHelper(earliestTimeStamp, dailyRecovered),
+      deaths: filterHelper(earliestTimeStamp, deaths),
+      deathsMillPop: filterHelper(earliestTimeStamp, deathsMillPop),
+      recovered: filterHelper(earliestTimeStamp, recovered),
+      recoveredMillPop: filterHelper(earliestTimeStamp, recoveredMillPop),
+      totalCases: filterHelper(earliestTimeStamp, totalCases),
+      totalCasesMillionPop: filterHelper(earliestTimeStamp, totalCasesMillionPop)
+    });
+  })
+
+  return filteredEntries;
+}

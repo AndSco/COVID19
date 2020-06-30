@@ -81,27 +81,31 @@ const TopMenu = props => {
         label={!props.showPerMillion ? "RECOVERED" : "RECOVERED/1 MILLION POP"}
         changeTopic={props.changeTopic}
       />
-      <div id="top-buttons-container" style={{display: "flex"}}>
+      <div id="top-buttons-container" style={{ display: "flex" }}>
         <div>
-          <h6 onClick={props.toggleMillionAbsolute} style={Styles.optionsButton}>
+          <h6
+            onClick={props.toggleMillionAbsolute}
+            style={Styles.optionsButton}
+          >
             {props.showPerMillion
               ? "See absolute quantities"
               : "See quantities / 1 million population"}
           </h6>
         </div>
-        {props.currentDataLength > 1 && (
-          <div>
-            <h6
-              onClick={props.switchChronologicalComparison}
-              style={Styles.optionsButton}
-            >
-              {!props.isShowingFromDayOne
-                ? "Compare increase since 1st case"
-                : "Compare chronologically"}
-            </h6>
-          </div>
-        )}
-      </div>  
+        {props.currentDataLength > 1 &&
+          props.currentTimeFilter === "fromBeginning" && (
+            <div>
+              <h6
+                onClick={props.switchChronologicalComparison}
+                style={Styles.optionsButton}
+              >
+                {!props.isShowingFromDayOne
+                  ? "Compare increase since 1st case"
+                  : "Compare chronologically"}
+              </h6>
+            </div>
+          )}
+      </div>
     </div>
   );
 };
@@ -113,18 +117,18 @@ const ChronDataTopPart = props => {
     changeTopic,
     changePage,
     removeCountryData,
-    switchChronologicalComparison, 
-    isShowingFromDayOne, 
+    switchChronologicalComparison,
+    isShowingFromDayOne,
     showPerMillion,
-    toggleMillionAbsolute, 
-    openCountryList
+    toggleMillionAbsolute,
+    openCountryList,
+    currentTimeFilter
   } = props;
 
   return (
     <div
       id="graph-intro"
       style={{
-        // padding: ".6em 1.5em 0 1.5em",
         paddingBottom: 0,
         display: "flex",
         flexDirection: "column",
@@ -157,6 +161,7 @@ const ChronDataTopPart = props => {
             currentDataLength={currentData ? currentData.length : undefined}
             showPerMillion={showPerMillion}
             toggleMillionAbsolute={toggleMillionAbsolute}
+            currentTimeFilter={currentTimeFilter}
           />
         </div>
       </div>
