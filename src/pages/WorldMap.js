@@ -5,6 +5,8 @@ import TooltipContent from "../components/TooltipContent";
 import MouseTooltip from "react-sticky-mouse-tooltip";
 import useWindowDimensions from "../utils/useWindowDimensions";
 import MapTopMenu from "../components/TopMenu";
+import OptionsIcon from "../components/OptionsIcon";
+import "../styles/mapPage.css";
 
 
 const projection = geoEqualEarth()
@@ -14,6 +16,10 @@ const projection = geoEqualEarth()
 const WorldMap = props => {
   const [isTooltipVisible, setIsTooltipVisible] = React.useState(false);
   const [tooltipContent, setTooltipContent] = React.useState("");
+  const [isOptionPanelVisible, setIsOptionPanelVisible] = React.useState(false);
+  const toggleOptionPanel = () => setIsOptionPanelVisible(!isOptionPanelVisible);
+  const closeOptionPanel = () => setIsOptionPanelVisible(false);
+
   const { width, height } = useWindowDimensions();
 
   const {
@@ -99,13 +105,9 @@ const WorldMap = props => {
       >
         <TooltipContent content={tooltipContent} />
       </MouseTooltip>
-      <MapTopMenu
-        dataParameter={dataParameter}
-        changeParameter={changeParameter}
-      />
       <svg
         width={`${width}px`}
-        height={`${height * 0.90}px`}
+        height={`${height * 0.9}px`}
         viewBox="0 0 800 450"
         id="svg-map"
       >
@@ -146,6 +148,19 @@ const WorldMap = props => {
           ))}
         </g>
       </svg>
+      {isOptionPanelVisible && (
+        <MapTopMenu
+          dataParameter={dataParameter}
+          changeParameter={changeParameter}
+          closeOptionPanel={closeOptionPanel}
+        />
+      )}
+      <OptionsIcon
+        customStyles={{ bottom: 30, right: 30 }}
+        sectionShowing={dataParameter}
+        toggleOptionPanel={toggleOptionPanel}
+        isPanelOpen={isOptionPanelVisible}
+      />
     </div>
   );
 };

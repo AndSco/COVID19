@@ -1,7 +1,62 @@
-import React from "react";
+import React, { useState } from "react";
 import {formatDate, setSectionTitle} from "../utils/functions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChartBar, faChartLine, faGlobeEurope, faTable, faSkullCrossbones } from "@fortawesome/free-solid-svg-icons";
+import { faChartBar, faChartLine, faGlobeEurope, faTable, faSkullCrossbones, faBars } from "@fortawesome/free-solid-svg-icons";
+import "../styles/mobileMenu.css";
+import "../styles/navbar.css";
+import MobileMenu from "./MobileMenu";
+
+
+export const MenuItems = ({
+  isPageCurrentlyVisited,
+  handleClick,
+  goToChronWithoutCountrySelected, 
+  isMobileMenuOpen
+}) => {
+  return (
+    <>
+      <IconButton
+        icon={faGlobeEurope}
+        pageName={"worldMap"}
+        isPageCurrentlyVisited={isPageCurrentlyVisited}
+        handleClick={handleClick}
+        title="MAP"
+        needsMargin={isMobileMenuOpen === false}
+      />
+      <IconButton
+        icon={faChartLine}
+        pageName={"chronologicalData"}
+        isPageCurrentlyVisited={isPageCurrentlyVisited}
+        goToChronWithoutCountrySelected={goToChronWithoutCountrySelected}
+        title="GROWTH"
+        needsMargin={isMobileMenuOpen === false}
+      />
+      <IconButton
+        icon={faChartBar}
+        pageName={"chartBar"}
+        isPageCurrentlyVisited={isPageCurrentlyVisited}
+        handleClick={handleClick}
+        title="TOP-20"
+        needsMargin={isMobileMenuOpen === false}
+      />
+      <IconButton
+        icon={faTable}
+        pageName={"tableData"}
+        isPageCurrentlyVisited={isPageCurrentlyVisited}
+        handleClick={handleClick}
+        title="TABLE"
+        needsMargin={isMobileMenuOpen === false}
+      />
+      <IconButton
+        icon={faSkullCrossbones}
+        pageName={"historicalPandemics"}
+        isPageCurrentlyVisited={isPageCurrentlyVisited}
+        handleClick={handleClick}
+        title="PANDEMICS"
+      />
+    </>
+  );
+};
 
 
 const IconButton = props => {
@@ -50,7 +105,12 @@ const IconButton = props => {
 }
 
 
+
 const TitleSection = props => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const openMobileMenu = () => setIsMobileMenuOpen(true);
+  const closeMobileMenu = () => setIsMobileMenuOpen(false);
+
   const { latestDataDate, goToChronWithoutCountrySelected, changePage, showingNow, goHome } = props;
   const date = formatDate(latestDataDate);
   const isPageCurrentlyVisited = pageName => {
@@ -62,6 +122,12 @@ const TitleSection = props => {
       return;
     }
     changePage(pageName);
+    closeMobileMenu();
+  }
+
+  const handleChronSectionClick = () => {
+    goToChronWithoutCountrySelected();
+    closeMobileMenu();
   }
 
   return (
@@ -73,53 +139,35 @@ const TitleSection = props => {
         alignItems: "center"
       }}
     >
+      {isMobileMenuOpen && (
+        <MobileMenu
+          isPageCurrentlyVisited={isPageCurrentlyVisited}
+          handleClick={handleClick}
+          goToChronWithoutCountrySelected={handleChronSectionClick}
+          closeMobileMenu={closeMobileMenu}
+        />
+      )}
+
       <div id="title" onClick={goHome} style={{ cursor: "pointer" }}>
         {/* <FontAwesomeIcon icon={faVirus} /> */}
         <h3 style={Styles.margin}>{`#COVID19 update`}</h3>
         <h6 style={Styles.margin}>{`Latest data: ${date}`}</h6>
       </div>
-      <h2>-- {setSectionTitle(showingNow).toUpperCase()} --</h2>
-      <div style={{ display: "flex" }}>
-        <IconButton
-          icon={faGlobeEurope}
-          pageName={"worldMap"}
+      <h2 className="section-title">{setSectionTitle(showingNow).toUpperCase()}</h2>
+      <div className="menu-items">
+        <MenuItems
           isPageCurrentlyVisited={isPageCurrentlyVisited}
           handleClick={handleClick}
-          title="MAP"
-          needsMargin={true}
-        />
-        <IconButton
-          icon={faChartLine}
-          pageName={"chronologicalData"}
-          isPageCurrentlyVisited={isPageCurrentlyVisited}
-          goToChronWithoutCountrySelected={goToChronWithoutCountrySelected}
-          title="GROWTH"
-          needsMargin={true}
-        />
-        <IconButton
-          icon={faChartBar}
-          pageName={"chartBar"}
-          isPageCurrentlyVisited={isPageCurrentlyVisited}
-          handleClick={handleClick}
-          title="TOP-20"
-          needsMargin={true}
-        />
-        <IconButton
-          icon={faTable}
-          pageName={"tableData"}
-          isPageCurrentlyVisited={isPageCurrentlyVisited}
-          handleClick={handleClick}
-          title="TABLE"
-          needsMargin={true}
-        />
-        <IconButton
-          icon={faSkullCrossbones}
-          pageName={"historicalPandemics"}
-          isPageCurrentlyVisited={isPageCurrentlyVisited}
-          handleClick={handleClick}
-          title="PANDEMICS"
+          goToChronWithoutCountrySelected={handleChronSectionClick}
+          isMobileMenuOpen={isMobileMenuOpen}
         />
       </div>
+      <FontAwesomeIcon
+        icon={faBars}
+        size="2x"
+        id="burger-menu"
+        onClick={openMobileMenu}
+      />
     </div>
   );
 }
