@@ -1,18 +1,22 @@
 import React from  "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCog, faTimesCircle } from "@fortawesome/free-solid-svg-icons";
+import { faListUl } from "@fortawesome/free-solid-svg-icons";
 import {formatTableHeader} from "../utils/functions";
 
-const OptionsIcon = ({customStyles, sectionShowing, toggleOptionPanel, isPanelOpen}) => {
+const OptionsIcon = ({sectionShowing, toggleOptionPanel}) => {
   const label = formatTableHeader(sectionShowing);
   return (
-    <div style={{ ...styles.wrapper, ...customStyles }}>
+    <div style={styles.wrapper}>
       <div style={styles.textContainer}>
-        <p style={{margin: 0, paddingRight: ".7rem"}}>Now showing:</p>
-        <h3 style={{margin: 0}}>{label}</h3>
+        <p style={{ margin: 0, paddingRight: ".7rem" }} id="now-showing">
+          Now showing:
+        </p>
+        <h3 style={{ margin: 0 }} id="showing-now">
+          {label}
+        </h3>
       </div>
       <div style={styles.iconContainer} onClick={toggleOptionPanel}>
-        <FontAwesomeIcon icon={isPanelOpen ? faTimesCircle : faCog} size="2x" color="black" />
+        <FontAwesomeIcon icon={faListUl} size="2x" color="#525050" />
       </div>
     </div>
   );
@@ -22,6 +26,8 @@ const OptionsIcon = ({customStyles, sectionShowing, toggleOptionPanel, isPanelOp
 const styles = {
   wrapper: {
     position: "absolute", 
+    top: 30, 
+    right: 50, 
     display: "flex", 
     alignItems: "center"
   },
@@ -42,7 +48,7 @@ const styles = {
     justifyContent: "center",
     cursor: "pointer", 
     marginLeft: "1rem", 
-    zIndex: 1001
+    // zIndex: 1001
   }
 };
 

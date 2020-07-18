@@ -4,10 +4,8 @@ import { geoEqualEarth, geoPath } from "d3-geo";
 import TooltipContent from "../components/TooltipContent";
 import MouseTooltip from "react-sticky-mouse-tooltip";
 import useWindowDimensions from "../utils/useWindowDimensions";
-import MapTopMenu from "../components/TopMenu";
-import OptionsIcon from "../components/OptionsIcon";
 import "../styles/mapPage.css";
-
+import OptionsPanel from "../components/OptionsPanel";
 
 const projection = geoEqualEarth()
   .scale(160)
@@ -148,18 +146,11 @@ const WorldMap = props => {
           ))}
         </g>
       </svg>
-      {isOptionPanelVisible && (
-        <MapTopMenu
-          dataParameter={dataParameter}
-          changeParameter={changeParameter}
-          closeOptionPanel={closeOptionPanel}
-        />
-      )}
-      <OptionsIcon
-        customStyles={{ bottom: 30, right: 30 }}
-        sectionShowing={dataParameter}
-        toggleOptionPanel={toggleOptionPanel}
-        isPanelOpen={isOptionPanelVisible}
+
+      <OptionsPanel
+        dataParameter={dataParameter}
+        changeParameter={changeParameter}
+        closeOptionPanel={closeOptionPanel}
       />
     </div>
   );

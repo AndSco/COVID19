@@ -1,5 +1,5 @@
 import React from "react";
-import TopMenu from "../components/TopMenu";
+import OptionsPanel from "../components/OptionsPanel";
 import * as d3 from "d3";
 import useWindowDimensions from "../utils/useWindowDimensions";
 
@@ -105,7 +105,7 @@ const BarChart = props => {
   
   return (
     <div id="barchart-page" className="page">
-      <TopMenu
+      <OptionsPanel
         dataParameter={dataParameter}
         changeParameter={changeParameter}
       />

@@ -1,5 +1,9 @@
-import React from "react";
+import React, {useState} from "react";
 import {formatTableHeader} from "../utils/functions";
+import OptionsIcon from "./OptionsIcon";
+import "../styles/optionsPanel.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 
 const MenuItem = ({ dataParameter, changeParameter, label, closeOptionPanel }) => {
   const isSelected = dataParameter === label;
@@ -29,13 +33,14 @@ const MenuItem = ({ dataParameter, changeParameter, label, closeOptionPanel }) =
   );
 };
 
-const TopMenu = props => {
-  const { dataParameter, changeParameter, closeOptionPanel } = props;
+const OptionsPanel = ({ dataParameter, changeParameter } ) => {
+  const [isOptionPanelVisible, setIsOptionPanelVisible] = useState(false);
+  const toggleOptionPanel = () => setIsOptionPanelVisible(!isOptionPanelVisible);
+  const closeOptionPanel = () => setIsOptionPanelVisible(false);
 
-
-  return (
-    <div id="top-menu-container">
-      <div id="top-menu">
+  return isOptionPanelVisible ? (
+    <div id="container">
+      <div id="menu">
         <MenuItem
           label="totalCases"
           dataParameter={dataParameter}
@@ -84,10 +89,17 @@ const TopMenu = props => {
           changeParameter={changeParameter}
           closeOptionPanel={closeOptionPanel}
         />
+        <FontAwesomeIcon icon={faTimesCircle} size="2x" color="black" onClick={closeOptionPanel} style={{cursor: "pointer", alignSelf: "flex-end"}} />
       </div>
     </div>
+  ) : (
+    <OptionsIcon
+      sectionShowing={dataParameter}
+      toggleOptionPanel={toggleOptionPanel}
+      isPanelOpen={isOptionPanelVisible}
+    />
   );
 };
 
 
-export default TopMenu;
+export default OptionsPanel;
