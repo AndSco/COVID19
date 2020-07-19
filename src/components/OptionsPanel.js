@@ -33,63 +33,103 @@ const MenuItem = ({ dataParameter, changeParameter, label, closeOptionPanel }) =
   );
 };
 
-const OptionsPanel = ({ dataParameter, changeParameter } ) => {
+const OptionsPanel = ({ dataParameter, changeParameter, scope } ) => {
   const [isOptionPanelVisible, setIsOptionPanelVisible] = useState(false);
+  const [showOptionsPerMillion, setIsShowOptionsPerMillion] = useState(false);
   const toggleOptionPanel = () => setIsOptionPanelVisible(!isOptionPanelVisible);
   const closeOptionPanel = () => setIsOptionPanelVisible(false);
 
   return isOptionPanelVisible ? (
     <div id="container">
       <div id="menu">
-        <MenuItem
-          label="totalCases"
-          dataParameter={dataParameter}
-          changeParameter={changeParameter}
-          closeOptionPanel={closeOptionPanel}
+        {!showOptionsPerMillion &&
+          <>
+            <MenuItem
+              label="totalCases"
+              dataParameter={dataParameter}
+              changeParameter={changeParameter}
+              closeOptionPanel={closeOptionPanel}
+            />
+            <MenuItem
+              label="activeCases"
+              dataParameter={dataParameter}
+              changeParameter={changeParameter}
+              closeOptionPanel={closeOptionPanel}
+            />
+            <MenuItem
+              label="deaths"
+              dataParameter={dataParameter}
+              changeParameter={changeParameter}
+              closeOptionPanel={closeOptionPanel}
+            />
+            <MenuItem
+              label="recovered"
+              dataParameter={dataParameter}
+              changeParameter={changeParameter}
+              closeOptionPanel={closeOptionPanel}
+            />
+
+            {scope !== "scatterplot" &&
+            <>
+              <MenuItem
+                label="newActiveCases"
+                dataParameter={dataParameter}
+                changeParameter={changeParameter}
+                closeOptionPanel={closeOptionPanel}
+              />
+              <MenuItem
+                label="newDeaths"
+                dataParameter={dataParameter}
+                changeParameter={changeParameter}
+                closeOptionPanel={closeOptionPanel}
+              />
+            </>  
+            }
+          </>
+        }
+
+        {showOptionsPerMillion &&
+          <>
+            <MenuItem
+              label="totalCasesMillionPop"
+              dataParameter={dataParameter}
+              changeParameter={changeParameter}
+              closeOptionPanel={closeOptionPanel}
+            />
+            <MenuItem
+              label="activeCasesMillPop"
+              dataParameter={dataParameter}
+              changeParameter={changeParameter}
+              closeOptionPanel={closeOptionPanel}
+            />
+            <MenuItem
+              label="deathsMillPop"
+              dataParameter={dataParameter}
+              changeParameter={changeParameter}
+              closeOptionPanel={closeOptionPanel}
+            />
+            <MenuItem
+              label="recoveredMillPop"
+              dataParameter={dataParameter}
+              changeParameter={changeParameter}
+              closeOptionPanel={closeOptionPanel}
+            />
+          </>
+        }
+  
+        <h6 className="options-button" onClick={() => setIsShowOptionsPerMillion(!showOptionsPerMillion)}>
+          {showOptionsPerMillion
+            ? "See absolute quantities"
+            : "See quantities / 1 million population"}
+        </h6>
+
+        <FontAwesomeIcon
+          icon={faTimesCircle}
+          size="2x"
+          color="black"
+          onClick={closeOptionPanel}
+          style={{ cursor: "pointer", alignSelf: "flex-end" }}
         />
-        <MenuItem
-          label="activeCases"
-          dataParameter={dataParameter}
-          changeParameter={changeParameter}
-          closeOptionPanel={closeOptionPanel}
-        />
-        <MenuItem
-          label="deaths"
-          dataParameter={dataParameter}
-          changeParameter={changeParameter}
-          closeOptionPanel={closeOptionPanel}
-        />
-        <MenuItem
-          label="recovered"
-          dataParameter={dataParameter}
-          changeParameter={changeParameter}
-          closeOptionPanel={closeOptionPanel}
-        />
-        <MenuItem
-          label="totalCasesMillionPop"
-          dataParameter={dataParameter}
-          changeParameter={changeParameter}
-          closeOptionPanel={closeOptionPanel}
-        />
-        <MenuItem
-          label="activeCasesMillPop"
-          dataParameter={dataParameter}
-          changeParameter={changeParameter}
-          closeOptionPanel={closeOptionPanel}
-        />
-        <MenuItem
-          label="newActiveCases"
-          dataParameter={dataParameter}
-          changeParameter={changeParameter}
-          closeOptionPanel={closeOptionPanel}
-        />
-        <MenuItem
-          label="newDeaths"
-          dataParameter={dataParameter}
-          changeParameter={changeParameter}
-          closeOptionPanel={closeOptionPanel}
-        />
-        <FontAwesomeIcon icon={faTimesCircle} size="2x" color="black" onClick={closeOptionPanel} style={{cursor: "pointer", alignSelf: "flex-end"}} />
       </div>
     </div>
   ) : (

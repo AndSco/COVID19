@@ -14,14 +14,13 @@ const FilterOption = ({changeTimeFilteredData, timeUnit, text, isSelected, chang
 
 const TimeFilters = ({ changeTimeFilteredData, currentTimeFilter }) => {
   return (
-    <div style={Styles.container}>
+    <div id="time-filters">
       <h3>Filter by period</h3>
       <FilterOption
         text="Since 1st case"
         timeUnit="fromBeginning"
         isSelected={currentTimeFilter === "fromBeginning"}
         changeTimeFilteredData={changeTimeFilteredData}
-        // changeTimeFilter={changeTimeFilter}
       />
       <FilterOption
         text="Past week"

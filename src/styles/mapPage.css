@@ -5,7 +5,11 @@
   align-items: center;
   position: relative;
   min-height: 300px;
+}
 
+
+.countries {
+  cursor: pointer;
 }
 
 
@@ -23,14 +27,61 @@
   background-color: #D6F1F3;
 }
 
+#summary-box {
+  padding: .6em 1.8em 1.2em 1.8em;
+  background-color: white;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border-right: 5px solid #895FC6;
+  text-align: left;
+  width: 200px;
+  border-top-right-radius: 10%;
+  border-bottom-right-radius: 10%;
+  position: absolute;
+  opacity: .8;
+  z-index: 1000;
+}
 
+#summary-title {
+    /* color: #895FC6; */
+    border-bottom: 3px solid #895FC6;
+    padding: 4px;
+}
 
-@media only screen and (max-width:900px) {
+.summary-item {
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+}
+
+@media only screen and (max-width: 1000px) {
   #chart-container {
     height: 35vh;
   }
 
+  #map-label {
+    border-right: none;
+    order: 1;
+  }
+
+  #svg-map {
+    order: 2;
+  }
+
+
   #summary-box {
     flex: 1;
+    order: 2;
+    width: 100vw;
+    border-radius: 0;
+    align-items: center;
+    padding: 1em 0;
+    padding-bottom: 2em;
+    border: 0;
+    border-bottom: 2px solid #CACFD2;
+    opacity: 1;
+    position: initial;
   }
 }

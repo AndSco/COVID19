@@ -194,6 +194,12 @@ export const formatTableHeader = rawHeader => {
     case "newDeaths":
       return "New deaths";
 
+    case "deathsMillPop":
+      return "Deaths/1 million";
+
+    case "recoveredMillPop":
+      return "Recovered/1 million";
+
     default:
       return rawHeader.charAt(0).toUpperCase() + rawHeader.slice(1);
   }

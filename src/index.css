@@ -56,101 +56,7 @@ text {
   padding-left: 2.5em;
 }
 
-/* .menu-item h6 {
-  cursor: pointer;
-  text-transform: uppercase;
-  margin: 0;
-  padding: .5em 1.5em;
-  border-radius: 40px;
-} */
 
-.countries {
-  cursor: pointer;
-}
-
-
-#summary-box {
-  padding: .6em 1.8em 1.2em 1.8em;
-  background-color: white;
-  color: black;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  border-right: 5px solid #895FC6;
-  text-align: left;
-  width: 200px;
-  border-top-right-radius: 10%;
-  border-bottom-right-radius: 10%;
-  position: absolute;
-  opacity: .8;
-  z-index: 1000;
-}
-
-#summary-title {
-    /* color: #895FC6; */
-    border-bottom: 3px solid #895FC6;
-    padding: 4px;
-}
-
-.summary-item {
-  margin-bottom: 6px;
-  display: flex;
-  align-items: center;
-}
-
-#table-container {
-  padding: 3em 2em;
-  background: white;
-  color: #282c34;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-table {
-  width: 100%;
-}
-
-.country-cell {
-  text-align: left;
-  font-weight: bold;
-  width: 140px;
-}
-
-th {
-  font-size: .6em;
-  text-transform: uppercase;
-  cursor: pointer;
-  width: 140px;
-}
-
-
-thead th { 
-  position: sticky; 
-  top: 0;
-  height: 70px;
-  background-color: white;
-  padding: 3.5em 0 0 0;
-
-}
-
-
-.sort-icon {
-  margin-left: 5px;
-}
-
-
-td {
-  max-width: 120px;
-  padding: 6px 4px;
-  font-size: .8em;
-}
-
-tbody tr:hover {
-  background-color: #E518E8;
-  color: white;
-  cursor: pointer;
-}
 
 
 #input-wrapper {
@@ -250,19 +156,6 @@ tbody tr:hover {
     order: 1;
   }
 
-  #summary-box {
-    order: 2;
-    width: 100vw;
-    border-radius: 0;
-    align-items: center;
-    padding: 1em 0;
-    padding-bottom: 2em;
-    border: 0;
-    border-bottom: 2px solid #CACFD2;
-    opacity: 1;
-    position: initial;
-  }
-
   #table-container {
     overflow: scroll;
   }
@@ -275,17 +168,6 @@ tbody tr:hover {
     justify-content: flex-start;
   }
 
-
-  #map-label {
-    border-right: none;
-    order: 1;
-  }
-
-  #svg-map {
-    order: 2;
-    /* width: 320px;
-    height: 300px; */
-  }
 
   #graph-intro {
     flex-direction: column;

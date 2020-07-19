@@ -34,7 +34,9 @@ const getLatestDataForACountry = countryObj => {
     "deaths",
     "recovered",
     "totalCasesMillionPop",
-    "activeCasesMillPop"
+    "activeCasesMillPop",
+    "deathsMillPop",
+    "recoveredMillPop"
   ];
 
   const {newActiveCases, newDeaths, country} = countryObj;

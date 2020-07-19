@@ -78,7 +78,6 @@ const WorldMap = props => {
 
   const handleCountryClick = countryIndex => {
     highlightCountry(countryIndex);
-    // console.log("Clicked on country: ", geographies[countryIndex]);
     noMoreShowingWorldData();
     const objectData = geographies[countryIndex].properties.data;
     console.log("SEL country data", objectData);

@@ -78,7 +78,7 @@ const CountrySelector = props => {
         <FontAwesomeIcon
           icon={faArrowCircleLeft}
           size="2x"
-          style={{ position: "fixed", top: 25, left: 35, cursor: "pointer" }}
+          style={{ position: "fixed", top: "90vh", left: 35, cursor: "pointer" }}
           onClick={goHome}
           color="#E5E7E9"
         /> 

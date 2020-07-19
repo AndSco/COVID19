@@ -18,6 +18,7 @@ function App() {
   const [data, setData] = React.useState([]);
   const [worldwideData, setWorldwideData] = React.useState(null);
   const chronVirusData = useDataMassaging();
+  console.log("chron", chronVirusData)
   const [virusData, setVirusData] = React.useState([]);
   const [summaryData, setSummaryData] = React.useState({});
   const [geographies, setGeographies] = React.useState([]);
@@ -30,7 +31,8 @@ function App() {
   // For selecting chron section without a country selected yet
   const [noCountrySelected, setNoCountrySelected] = React.useState(false);
 
-  // React.useEffect(() => console.log("NOCOUNTRY?", noCountrySelected), [noCountrySelected]);
+  React.useEffect(() => console.log("GEOGRAPHIES", geographies), [geographies]);
+
   const goToChronWithoutCountrySelected = () => {
     setNoCountrySelected(true);
     changePage("chronologicalData");
@@ -38,7 +40,6 @@ function App() {
 
   const goToChronWithCountrySelected = () => {
     setNoCountrySelected(false);
-    // changePage("chronologicalData");
   };
 
   const resetChronCountrySelected = () => {
@@ -170,7 +171,6 @@ function App() {
       {showingNow === "chronologicalData" && (
         <ScatterPlot
           country={countryChronologicalData}
-          changePage={changePage}
           noCountrySelected={noCountrySelected}
           goToChronWithCountrySelected={goToChronWithCountrySelected}
           goHome={goHome}

@@ -131,14 +131,7 @@ const TitleSection = props => {
   }
 
   return (
-    <div
-      style={{
-        width: "90%",
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center"
-      }}
-    >
+    <div id="nav-content">
       {isMobileMenuOpen && (
         <MobileMenu
           isPageCurrentlyVisited={isPageCurrentlyVisited}

@@ -6,7 +6,7 @@ import {formatTableHeader} from "../utils/functions";
 const OptionsIcon = ({sectionShowing, toggleOptionPanel}) => {
   const label = formatTableHeader(sectionShowing);
   return (
-    <div style={styles.wrapper}>
+    <div style={styles.wrapper} id="options-button">
       <div style={styles.textContainer}>
         <p style={{ margin: 0, paddingRight: ".7rem" }} id="now-showing">
           Now showing:

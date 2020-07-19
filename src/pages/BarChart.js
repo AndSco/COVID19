@@ -7,7 +7,8 @@ import useWindowDimensions from "../utils/useWindowDimensions";
 const BarChart = props => {
   const {data, dataParameter, changeParameter} = props;
   const {width, height} = useWindowDimensions();
-  const svgWidth = width / 1.2;
+  console.log("width & height are", width, height)
+  const svgWidth = width > 400 ? width / 1.2 : 700;
   const svgHeight = height / 1.3;
   const svgMargin = 90;
   const svgContainer = React.useRef();
@@ -109,7 +110,7 @@ const BarChart = props => {
         dataParameter={dataParameter}
         changeParameter={changeParameter}
       />
-      <div ref={svgContainer}></div>
+      <div ref={svgContainer} style={{maxWidth: "100vh", minWidth: "90vw", overflow: "scroll"}}></div>
     </div>
   );
 }
