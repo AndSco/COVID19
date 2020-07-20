@@ -1,5 +1,5 @@
 import React from "react";
-import { sortTableData, formatTableHeader } from "../utils/functions";
+import { sortTableData, formatTableHeader, addCommasToPlainNumbers } from "../utils/functions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faSortAmountDown,
@@ -31,14 +31,13 @@ const Table = props => {
   const [isSortedMaxMin, setIsSortedMaxMin] = React.useState(true);
   const { prepareCountryChronologicalData } = props;
 
-  console.log("virData", virusData)
   const createTableCells = obj => {
     let cells = [];
     for (let [key, value] of Object.entries(obj)) {
       const class_name = key === "country" ? "country-cell" : "";
       cells.push(
         <td key={key} className={class_name}>
-          {value ? value : "NA"}
+          {value ? key === "country" ? value : addCommasToPlainNumbers(value) : "NA"}
         </td>
       );
     }

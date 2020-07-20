@@ -344,6 +344,26 @@ export const addCommas = num => {
 };
 
 
+export const addCommasToPlainNumbers = num => {
+  const numsFormatted = [];
+  const stringifiedNum = num + "";
+  const [whole, decimals] = stringifiedNum.split(".");
+  let counter = 0;
+  for (let i = whole.length - 1; i >= 0; i--) {
+    if (counter % 3 === 0 && i !== whole.length - 1) {
+      numsFormatted.push(",");
+    }
+    const curr = whole[i];
+    numsFormatted.push(curr);
+    counter++;
+  }
+  let toReturn = numsFormatted.reverse().join("");
+  if (decimals !== undefined) {
+    toReturn += "." + decimals;
+  }
+  return toReturn;
+}
+
 
 const filterHelper = (earliestTimeStamp, data) => {
   return data.filter(item => item.date.getTime() >= earliestTimeStamp);

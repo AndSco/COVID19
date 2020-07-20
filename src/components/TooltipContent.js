@@ -1,5 +1,5 @@
 import React from "react";
-import {formatTableHeader} from "../utils/functions"
+import { formatTableHeader, addCommasToPlainNumbers } from "../utils/functions";
 
 const TooltipContent = props => {
   const {title, label, data, details} = props.content;
@@ -14,7 +14,7 @@ const TooltipContent = props => {
     <div>
       <h3 style={Styles.line}>{title}</h3>
       <p style={Styles.line}>{formatLabel(label)}</p>
-      <h4 style={Styles.line}>{data}</h4>
+      <h4 style={Styles.line}>{addCommasToPlainNumbers(data)}</h4>
       {details && <h5 style={Styles.line}>{details}</h5>}
     </div>
   );

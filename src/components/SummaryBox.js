@@ -1,11 +1,11 @@
 import React from "react";
-import {formatTableHeader} from "../utils/functions";
+import { formatTableHeader, addCommasToPlainNumbers } from "../utils/functions";
 
-const ContentLine = props => {
+const ContentLine = ({label, data}) => {
   return (
     <div className="summary-item">
-      <h5 style={{ margin: 0 }}>{`${props.label}:`}</h5>
-      <p style={{ margin: "2px 5px" }}>{props.data}</p>
+      <h5 style={{ margin: 0 }}>{`${label}:`}</h5>
+      <p style={{ margin: "2px 5px" }}>{addCommasToPlainNumbers(data)}</p>
     </div>
   );
 };
@@ -22,7 +22,7 @@ const SummaryBox = props => {
   const data = [];
 
   Object.entries(content)
-    .filter(([key, value]) => key !== "country" && key !== "population")
+    .filter(([key]) => key !== "country" && key !== "population")
     .map(([key, value]) => data.push(<ContentLine label={formatTableHeader(key)} data={value} key={key} />))
 
   // console.log("DATA", data);  

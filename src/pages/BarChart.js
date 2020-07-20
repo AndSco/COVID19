@@ -2,6 +2,7 @@ import React from "react";
 import OptionsPanel from "../components/OptionsPanel";
 import * as d3 from "d3";
 import useWindowDimensions from "../utils/useWindowDimensions";
+import {addCommasToPlainNumbers} from "../utils/functions";
 
 
 const BarChart = props => {
@@ -99,7 +100,7 @@ const BarChart = props => {
               `translate(${xScale(d.country) + 20} , ${yScale(d.cases) -
                 8}), rotate(-90)`
           )
-          .text(d => d.cases)
+          .text(d => addCommasToPlainNumbers(d.cases))
       
     }
   }, [currentData, svgHeight, svgWidth, xAxis, xScale, yAxis, yScale])
