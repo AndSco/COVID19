@@ -41,7 +41,7 @@
   border-bottom-right-radius: 10%;
   position: absolute;
   opacity: .8;
-  z-index: 1000;
+  z-index: 9;
 }
 
 #summary-title {
