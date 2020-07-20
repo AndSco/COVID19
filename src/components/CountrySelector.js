@@ -116,7 +116,8 @@ const Styles = {
     left: 0,
     backgroundColor: "#282c34",
     overflow: "scroll", 
-    padding: "1.5em 0"
+    padding: "1.5em 0", 
+    zIndex: 3
   }, 
   input: {
     padding: "1em 2em",

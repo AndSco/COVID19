@@ -1,7 +1,6 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faArrowCircleLeft,
   faTimesCircle,
   faPlus
 } from "@fortawesome/free-solid-svg-icons";
@@ -20,7 +19,7 @@ const CountryLabel = props => {
           backgroundColor: countryColors[index]
         }}
       ></div>
-      <h5 style={{ ...Styles.countryHeader, fontSize: "1.2em" }}>{entryShowing.country}</h5>
+      <h5 style={{ ...Styles.countryHeader, fontSize: ".9em" }}>{entryShowing.country}</h5>
       {currentData.length > 1 && (
         <FontAwesomeIcon
           icon={faTimesCircle}
@@ -42,7 +41,8 @@ const AddCountryButton = ({ currentData, removeCountryData, openCountryList  }) 
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          flexWrap: "wrap"
+          flexWrap: "wrap", 
+          maxWidth: "80vw"
         }}
       >
         {currentData &&

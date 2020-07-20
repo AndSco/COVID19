@@ -19,8 +19,8 @@ const SideLine = props => {
     >
       <div
         style={{
-          width: 100,
-          height: 100,
+          width: 80,
+          height: 60,
           borderRadius: 50,
           backgroundColor: "white",
           display: "flex", 
@@ -30,9 +30,9 @@ const SideLine = props => {
           textAlign: "center"
         }}
       >
-        <h3 style={{ color: "black" }}>{props.year}</h3>
+        <h3 style={{ color: "black", margin: 0, fontSize: ".7rem" }}>{props.year}</h3>
       </div>
-      <div style={{ width: 2, backgroundColor: "white", flex: 1 }}></div>
+      <div style={{ width: 1, backgroundColor: "white", flex: 1 }}></div>
     </div>
   );
 };

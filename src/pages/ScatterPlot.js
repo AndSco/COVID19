@@ -32,9 +32,9 @@ const ScatterPlot = props => {
   const [isTooltipVisible, setIsTooltipVisible] = React.useState(false);
   const [tooltipContent, setTooltipContent] = React.useState("");
   const svgContainer = React.useRef();
-  const width = useWindowDimensions().width - 200;
+  const width = useWindowDimensions().width;
   const height = 420;
-  const padding = { top: 40, right: width / 15, bottom: 40, left: width / 15 };
+  const padding = { top: 20, right: width / 15, bottom: 20, left: width / 15 };
 
   // Manage filtering results by time period
   const [timeFilteredData, setTimeFilteredData] = React.useState(null);
@@ -134,9 +134,6 @@ const ScatterPlot = props => {
     setTopic(topic);
   };
 
-  // const switchChronologicalComparison = () => {
-  //   setIsShowingFromDayOne(!isShowingFromDayOne);
-  // };
 
   const allCountries = allChronologicalData
     ? allChronologicalData.map(entry => entry.country).sort()
@@ -297,7 +294,11 @@ const ScatterPlot = props => {
 
   return (
     <div id="page-container">
-      <OptionsPanel dataParameter={topic} changeParameter={changeTopic} scope="scatterplot" />
+      <OptionsPanel
+        dataParameter={topic}
+        changeParameter={changeTopic}
+        scope="scatterplot"
+      />
 
       {(isCountryListShowing || noCountrySelected) && (
         <CountrySelector
@@ -310,12 +311,8 @@ const ScatterPlot = props => {
           goHome={goHome}
         />
       )}
-      <div style={{ display: "flex" }}>
+      <div style={{ display: "flex", marginTop: "5rem" }}>
         <div ref={svgContainer}></div>
-        <TimeFilters
-          changeTimeFilteredData={changeTimeFilteredData}
-          currentTimeFilter={currentTimeFilter}
-        />
       </div>
       <MouseTooltip
         visible={isTooltipVisible}
@@ -326,11 +323,17 @@ const ScatterPlot = props => {
         <TooltipContent content={tooltipContent} />
       </MouseTooltip>
 
-      <AddCountryButton
-        currentData={currentData}
-        removeCountryData={removeCountryData}
-        openCountryList={openCountryList}
-      />
+      <div id="bottom-options">
+        <AddCountryButton
+          currentData={currentData}
+          removeCountryData={removeCountryData}
+          openCountryList={openCountryList}
+        />
+        <TimeFilters
+          changeTimeFilteredData={changeTimeFilteredData}
+          currentTimeFilter={currentTimeFilter}
+        />
+      </div>
     </div>
   );
 };

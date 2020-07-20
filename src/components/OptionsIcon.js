@@ -1,7 +1,6 @@
 import React from  "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faListUl } from "@fortawesome/free-solid-svg-icons";
 import {formatTableHeader} from "../utils/functions";
+import MenuIconSelector from "./MenuIconSelector";
 
 const OptionsIcon = ({sectionShowing, toggleOptionPanel}) => {
   const label = formatTableHeader(sectionShowing);
@@ -15,9 +14,7 @@ const OptionsIcon = ({sectionShowing, toggleOptionPanel}) => {
           {label}
         </h3>
       </div>
-      <div style={styles.iconContainer} onClick={toggleOptionPanel}>
-        <FontAwesomeIcon icon={faListUl} size="2x" color="#525050" />
-      </div>
+      <MenuIconSelector icon="list" onCLickFunction={toggleOptionPanel} />
     </div>
   );
 }
@@ -36,7 +33,8 @@ const styles = {
     padding: "10px 20px",
     borderRadius: 40, 
     alignItems: "center", 
-    background: "linear-gradient(to right, #f80759, #bc4e9c)"
+    background: "linear-gradient(to right, #f80759, #bc4e9c)", 
+    marginRight: "1rem"
   }, 
   iconContainer: {
     height: 50,
