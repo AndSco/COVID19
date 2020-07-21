@@ -178,7 +178,8 @@ const ScatterPlot = props => {
 
       const xAxis = d3
         .axisBottom(xScale)
-        .ticks(10)
+        // .ticks(10)
+        .ticks(width / 100)
         .tickSize(5)
         .tickFormat(
           !isShowingFromDayOne ? d3.timeFormat("%d-%m") : d3.format("d")
@@ -189,8 +190,8 @@ const ScatterPlot = props => {
         .domain([minimumCases, maximumCases])
         .range([height - padding.top * 2, padding.bottom * 2]);
 
-      const yAxis = d3.axisLeft(yScale);
-      // .ticks(5);
+      const yAxis = d3.axisLeft(yScale)
+        .ticks(8);
 
       const svgBox = d3.select(svgContainer.current);
 

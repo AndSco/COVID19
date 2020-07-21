@@ -15,7 +15,6 @@ const WorldMap = props => {
   const [isTooltipVisible, setIsTooltipVisible] = React.useState(false);
   const [tooltipContent, setTooltipContent] = React.useState("");
   const [isOptionPanelVisible, setIsOptionPanelVisible] = React.useState(false);
-  const toggleOptionPanel = () => setIsOptionPanelVisible(!isOptionPanelVisible);
   const closeOptionPanel = () => setIsOptionPanelVisible(false);
 
   const { width, height } = useWindowDimensions();

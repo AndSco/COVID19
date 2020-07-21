@@ -1,78 +1,78 @@
 // scratch historical plagues data from https://www.visualcapitalist.com/history-of-pandemics-deadliest/
-const extractHistoricalPandemicData = () => {
-  const table = document.querySelector("#tablepress-833");
-  const rows = table.querySelectorAll("tr");
-  const pandemics = [];
-  rows.forEach((row, index) => {
-    if (index === 0) return;
-    const tds = row.querySelectorAll("td");
-    const plagueObj = {};
-    tds.forEach((td, i) => {
-      switch (i) {
-        case 0:
-          plagueObj.name = td.innerText;
-          break;
+// const extractHistoricalPandemicData = () => {
+//   const table = document.querySelector("#tablepress-833");
+//   const rows = table.querySelectorAll("tr");
+//   const pandemics = [];
+//   rows.forEach((row, index) => {
+//     if (index === 0) return;
+//     const tds = row.querySelectorAll("td");
+//     const plagueObj = {};
+//     tds.forEach((td, i) => {
+//       switch (i) {
+//         case 0:
+//           plagueObj.name = td.innerText;
+//           break;
 
-        case 1:
-          plagueObj.period = td.innerText;
-          break;
+//         case 1:
+//           plagueObj.period = td.innerText;
+//           break;
 
-        case 2:
-          plagueObj.type = td.innerText;
-          break;
+//         case 2:
+//           plagueObj.type = td.innerText;
+//           break;
 
-        case 3:
-          plagueObj.victims = td.innerText;
-          break;
+//         case 3:
+//           plagueObj.victims = td.innerText;
+//           break;
 
-        default:
-          break;
-      }
-    });
+//         default:
+//           break;
+//       }
+//     });
 
-    const { victims } = plagueObj;
-    plagueObj.numDeaths = victims;
-    let { numDeaths } = plagueObj;
+//     const { victims } = plagueObj;
+//     plagueObj.numDeaths = victims;
+//     let { numDeaths } = plagueObj;
 
-    if (numDeaths.indexOf("-") !== -1) {
-      let indexToCut = 0;
-      const findIndex = (char) => numDeaths.indexOf(char);
-      const purifyEntry = index => numDeaths.slice(0, index).trim();
-      const splitAndReduce = (purifiedString, multiply = false) =>
-        purifiedString
-          .replace(/,/g, "")
-          .split("-")
-          .map(entry => (multiply ? +entry * 1000000 : +entry))
-          .reduce((a, b) => a + b, 0); 
+//     if (numDeaths.indexOf("-") !== -1) {
+//       let indexToCut = 0;
+//       const findIndex = (char) => numDeaths.indexOf(char);
+//       const purifyEntry = index => numDeaths.slice(0, index).trim();
+//       const splitAndReduce = (purifiedString, multiply = false) =>
+//         purifiedString
+//           .replace(/,/g, "")
+//           .split("-")
+//           .map(entry => (multiply ? +entry * 1000000 : +entry))
+//           .reduce((a, b) => a + b, 0); 
 
-      const hasMillions = numDeaths.indexOf("M") !== -1;
-      if (hasMillions) {
-        indexToCut = findIndex("M");
-        const nums = purifyEntry(indexToCut);
-        const sum = splitAndReduce(nums, true);
+//       const hasMillions = numDeaths.indexOf("M") !== -1;
+//       if (hasMillions) {
+//         indexToCut = findIndex("M");
+//         const nums = purifyEntry(indexToCut);
+//         const sum = splitAndReduce(nums, true);
     
-        plagueObj.numDeaths = sum / 2;
-      } else {
-        indexToCut = findIndex("(");
-        const nums = purifyEntry(indexToCut);
-        console.log("NUMS", nums);
-        const sum = splitAndReduce(nums);
-        console.log("SUM", sum);
+//         plagueObj.numDeaths = sum / 2;
+//       } else {
+//         indexToCut = findIndex("(");
+//         const nums = purifyEntry(indexToCut);
+//         console.log("NUMS", nums);
+//         const sum = splitAndReduce(nums);
+//         console.log("SUM", sum);
   
-        plagueObj.numDeaths = sum / 2;  
-      }
-    } else {
-      const purified = numDeaths
-        .replace(/,/g, "")
-        .replace("M", "000000");
-      plagueObj.numDeaths = +purified;  
-    }
+//         plagueObj.numDeaths = sum / 2;  
+//       }
+//     } else {
+//       const purified = numDeaths
+//         .replace(/,/g, "")
+//         .replace("M", "000000");
+//       plagueObj.numDeaths = +purified;  
+//     }
 
-    pandemics.push(plagueObj);
-  });
-  console.log(pandemics);
-  return pandemics;
-}
+//     pandemics.push(plagueObj);
+//   });
+//   console.log(pandemics);
+//   return pandemics;
+// }
 
 export default [
   {

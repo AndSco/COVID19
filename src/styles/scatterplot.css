@@ -34,3 +34,10 @@
   align-items: center;
   padding-bottom: 1em;
 }
+
+
+@media only screen and (max-width: 900px) {
+  #time-filters-wrapper {
+    bottom: 8vh;
+  }
+}

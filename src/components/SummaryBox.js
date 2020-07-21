@@ -18,14 +18,11 @@ const SummaryBox = props => {
     prepareCountryChronologicalData
   } = props;
 
-  // console.log("CONTENT", content);
   const data = [];
 
   Object.entries(content)
     .filter(([key]) => key !== "country" && key !== "population")
     .map(([key, value]) => data.push(<ContentLine label={formatTableHeader(key)} data={value} key={key} />))
-
-  // console.log("DATA", data);  
 
 
   return (
@@ -61,7 +58,8 @@ const Styles = {
     color: "white",
     fontSize: 14,
     width: "100%",
-    textAlign: "center"
+    textAlign: "center", 
+    borderRadius: 20
   }
 };
 
