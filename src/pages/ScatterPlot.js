@@ -92,17 +92,6 @@ const ScatterPlot = props => {
     }
   }, [currentData, topic]);
 
-  // See absolute data or data / 1 mill pop
-  const [showPerMillion, setShowPerMillion] = React.useState(false);
-
-  const toggleMillionAbsolute = () => {
-    if (showPerMillion) {
-      setTopic("activeCases");
-    } else {
-      setTopic("activeCasesMillPop");
-    }
-    setShowPerMillion(!showPerMillion);
-  };
 
   React.useEffect(() => {
     if (allChronologicalData) {
@@ -119,7 +108,7 @@ const ScatterPlot = props => {
       setCurrentTimeFilter("fromBeginning");
     }
     return () => resetChronCountrySelected(); //reset the chron country when leaving the section
-  }, [allChronologicalData, countriesSelected]);
+  }, [allChronologicalData, countriesSelected, resetChronCountrySelected]);
 
   const showDataForAnotherCountry = countryName => {
     setCountriesSelected([...countriesSelected, countryName]);

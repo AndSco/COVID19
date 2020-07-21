@@ -30,6 +30,10 @@
   cursor: pointer;
 }
 
+#close-menu {
+  padding-top: 40px;
+}
+
 .menu-items {
   display: flex;
 }
@@ -48,6 +52,18 @@
   }
 }
 
+
+@media only screen and (max-height:500px) {
+  #links-container {
+    flex-direction: row;
+    justify-content: space-between;
+    width: 350px;
+  }
+
+  #close-menu {
+    padding-top: 0;
+  }
+}
 
 /* @media only screen and (max-width:600px) {
   .section-title {

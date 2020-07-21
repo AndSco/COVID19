@@ -3,7 +3,7 @@ import otherPandemics from "../assets/historicalPandemics";
 import * as d3 from "d3";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSkull, faSkullCrossbones } from "@fortawesome/free-solid-svg-icons";
-import { addCommas } from "../utils/functions";
+import { addCommasToPlainNumbers } from "../utils/functions";
 import VisibilitySensor from "react-visibility-sensor";
 
 
@@ -66,10 +66,8 @@ const shortenNumVictims = string => {
 
 
 
-const ChronologicalView = props => {
-  const {allPandemics, scale} = props;
+const ChronologicalView = ({allPandemics, scale}) => {
   const [yearShowing, setYearShowing] = React.useState("1000");
-
 
   return (
     <div style={{ display: "flex", padding: 30 }}>
@@ -187,14 +185,13 @@ const VictimView = props => {
   );
 }
 
-const HistoricalPandemics = props => {
+const HistoricalPandemics = ({ covidDeaths }) => {
   const [typeOfView, setTypeOfView] = React.useState("victim");
-  const { covidDeaths } = props;
   const covidData = {
     name: "COVID-19",
     period: "2019-Present",
     type: "Coronavirus – Unknown (possibly pangolins)",
-    victims: `${addCommas(covidDeaths)}`,
+    victims: `${addCommasToPlainNumbers(covidDeaths)}`,
     numDeaths: covidDeaths
   };
 

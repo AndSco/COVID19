@@ -20,7 +20,6 @@ const MobileMenu = ({
         <FontAwesomeIcon
           icon={faTimesCircle}
           size="2x"
-          style={{ paddingTop: 40 }}
           onClick={closeMobileMenu}
           id="close-menu"
         />

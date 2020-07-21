@@ -54,12 +54,5 @@ const TimeFilters = ({ changeTimeFilteredData, currentTimeFilter }) => {
   );
 };
 
-const Styles = {
-  container: {
-    display: "flex",
-    flexDirection: "column", 
-    alignItems: "flex-end"
-  }
-}
 
 export default TimeFilters;

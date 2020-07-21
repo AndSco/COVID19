@@ -14,8 +14,6 @@ const projection = geoEqualEarth()
 const WorldMap = props => {
   const [isTooltipVisible, setIsTooltipVisible] = React.useState(false);
   const [tooltipContent, setTooltipContent] = React.useState("");
-  const [isOptionPanelVisible, setIsOptionPanelVisible] = React.useState(false);
-  const closeOptionPanel = () => setIsOptionPanelVisible(false);
 
   const { width, height } = useWindowDimensions();
 
@@ -148,7 +146,6 @@ const WorldMap = props => {
       <OptionsPanel
         dataParameter={dataParameter}
         changeParameter={changeParameter}
-        closeOptionPanel={closeOptionPanel}
       />
     </div>
   );
