@@ -1,4 +1,4 @@
-##COVID19 Update
+## COVID19 Update
 
 My quarantine project! Web app tracking the daily developments of the coronavirus outbreak worldwide, visually comparing chronological and quantitative data by country and giving a historical overview of past pandemics.
 
