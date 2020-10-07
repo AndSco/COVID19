@@ -64,7 +64,6 @@ const WorldMap = props => {
   const minCases = d3.min(totalCases);
   const maxCases = d3.max(totalCases);
 
-
   const col_range_low = "#EBDEF0";
   const col_range_high = "#4A235A";
   const colorScale = d3
@@ -163,4 +162,3 @@ const Styles = {
 };
 
 export default WorldMap;
-

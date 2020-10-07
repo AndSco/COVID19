@@ -1,7 +1,9 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {faTimesCircle, faArrowCircleLeft} from "@fortawesome/free-solid-svg-icons";
-
+import {
+  faTimesCircle,
+  faArrowCircleLeft
+} from "@fortawesome/free-solid-svg-icons";
 
 const CountryLine = props => {
   const {
@@ -18,7 +20,7 @@ const CountryLine = props => {
     showDataForAnotherCountry(countryName);
     if (goToChronWithCountrySelected) {
       goToChronWithCountrySelected();
-    };
+    }
     closeCountryList();
   };
 
@@ -40,7 +42,7 @@ const CountryLine = props => {
       {props.countryName}
     </h5>
   );
-}
+};
 
 const CountrySelector = props => {
   const {
@@ -54,8 +56,9 @@ const CountrySelector = props => {
   } = props;
 
   const [input, setInput] = React.useState("");
-  const [filteredCountries, setFilteredCountries] = React.useState([...allCountries]);
-  
+  const [filteredCountries, setFilteredCountries] = React.useState([
+    ...allCountries
+  ]);
 
   const handleChange = e => {
     const enteredValue = e.target.value;
@@ -63,7 +66,7 @@ const CountrySelector = props => {
     const regex = new RegExp(enteredValue, "i");
     const filtered = allCountries.filter(country => country.match(regex));
     setFilteredCountries(filtered);
-  }
+  };
 
   return (
     <div style={Styles.box}>
@@ -78,10 +81,15 @@ const CountrySelector = props => {
         <FontAwesomeIcon
           icon={faArrowCircleLeft}
           size="2x"
-          style={{ position: "fixed", top: "90vh", left: 35, cursor: "pointer" }}
+          style={{
+            position: "fixed",
+            top: "90vh",
+            left: 35,
+            cursor: "pointer"
+          }}
           onClick={goHome}
           color="#E5E7E9"
-        /> 
+        />
       )}
       <h2 style={{ color: "#FFFF00" }}>Choose a country to visualise data</h2>
       <input
@@ -105,26 +113,26 @@ const CountrySelector = props => {
       ))}
     </div>
   );
-}
+};
 
 const Styles = {
   box: {
     width: "100vw",
     height: "100vh",
-    position: "fixed", 
-    top: 0, 
+    position: "fixed",
+    top: 0,
     left: 0,
     backgroundColor: "#282c34",
-    overflow: "scroll", 
-    padding: "1.5em 0", 
+    overflow: "scroll",
+    padding: "1.5em 0",
     zIndex: 3
-  }, 
+  },
   input: {
     padding: "1em 2em",
     border: "none",
-    borderRadius: 40, 
+    borderRadius: 40,
     width: "20vw"
   }
-}
+};
 
 export default CountrySelector;

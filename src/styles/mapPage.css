@@ -7,47 +7,44 @@
   min-height: 300px;
 }
 
-
 .countries {
   cursor: pointer;
 }
 
-
 #map-label {
-  border-bottom: 3px solid  #E518E8;
+  border-bottom: 3px solid #e518e8;
   padding-bottom: 6px;
   padding-left: 30px;
   padding-right: 10px;
-  border-right: 3px solid #E518E8;
+  border-right: 3px solid #e518e8;
   width: 140px;
-}  
-
+}
 
 #svg-map {
-  background-color: #D6F1F3;
+  background-color: #d6f1f3;
 }
 
 #summary-box {
-  padding: .6em 1.8em 1.2em 1.8em;
+  padding: 0.6em 1.8em 1.2em 1.8em;
   background-color: white;
   color: black;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  border-right: 5px solid #895FC6;
+  border-right: 5px solid #895fc6;
   text-align: left;
   width: 200px;
   border-top-right-radius: 10%;
   border-bottom-right-radius: 10%;
   position: absolute;
-  opacity: .8;
+  opacity: 0.8;
   z-index: 9;
 }
 
 #summary-title {
-    /* color: #895FC6; */
-    border-bottom: 3px solid #895FC6;
-    padding: 4px;
+  /* color: #895FC6; */
+  border-bottom: 3px solid #895fc6;
+  padding: 4px;
 }
 
 .summary-item {
@@ -70,7 +67,6 @@
     order: 2;
   }
 
-
   #summary-box {
     flex: 1;
     order: 2;
@@ -80,7 +76,7 @@
     padding: 1em 0;
     padding-bottom: 3em;
     border: 0;
-    border-bottom: 2px solid #CACFD2;
+    border-bottom: 2px solid #cacfd2;
     opacity: 1;
     position: initial;
   }

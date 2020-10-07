@@ -1,16 +1,22 @@
 import React, { useState } from "react";
-import {formatDate, setSectionTitle} from "../utils/functions";
+import { formatDate, setSectionTitle } from "../utils/functions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChartBar, faChartLine, faGlobeEurope, faTable, faSkullCrossbones, faBars } from "@fortawesome/free-solid-svg-icons";
+import {
+  faChartBar,
+  faChartLine,
+  faGlobeEurope,
+  faTable,
+  faSkullCrossbones,
+  faBars
+} from "@fortawesome/free-solid-svg-icons";
 import "../styles/mobileMenu.css";
 import "../styles/navbar.css";
 import MobileMenu from "./MobileMenu";
 
-
 export const MenuItems = ({
   isPageCurrentlyVisited,
   handleClick,
-  goToChronWithoutCountrySelected, 
+  goToChronWithoutCountrySelected,
   isMobileMenuOpen
 }) => {
   return (
@@ -58,7 +64,6 @@ export const MenuItems = ({
   );
 };
 
-
 const IconButton = props => {
   const {
     isPageCurrentlyVisited,
@@ -73,8 +78,8 @@ const IconButton = props => {
   const nonHighlightedColor = "#D7BDE2";
 
   const currentColor = isPageCurrentlyVisited(pageName)
-          ? highlightColor
-          : nonHighlightedColor;
+    ? highlightColor
+    : nonHighlightedColor;
 
   return (
     <div
@@ -83,7 +88,7 @@ const IconButton = props => {
         flexDirection: "column",
         alignItems: "center",
         marginRight: needsMargin ? "1.3em" : 0,
-        color: currentColor, 
+        color: currentColor
       }}
     >
       <h6 style={{ margin: 0 }}>{title}</h6>
@@ -102,20 +107,24 @@ const IconButton = props => {
       />
     </div>
   );
-}
-
-
+};
 
 const TitleSection = props => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const openMobileMenu = () => setIsMobileMenuOpen(true);
   const closeMobileMenu = () => setIsMobileMenuOpen(false);
 
-  const { latestDataDate, goToChronWithoutCountrySelected, changePage, showingNow, goHome } = props;
+  const {
+    latestDataDate,
+    goToChronWithoutCountrySelected,
+    changePage,
+    showingNow,
+    goHome
+  } = props;
   const date = formatDate(latestDataDate);
   const isPageCurrentlyVisited = pageName => {
     return showingNow === pageName;
-  }
+  };
 
   const handleClick = pageName => {
     if (isPageCurrentlyVisited(pageName)) {
@@ -123,12 +132,12 @@ const TitleSection = props => {
     }
     changePage(pageName);
     closeMobileMenu();
-  }
+  };
 
   const handleChronSectionClick = () => {
     goToChronWithoutCountrySelected();
     closeMobileMenu();
-  }
+  };
 
   return (
     <div id="nav-content">
@@ -146,7 +155,9 @@ const TitleSection = props => {
         <h3 style={Styles.margin}>{`#COVID19 update`}</h3>
         <h6 style={Styles.margin}>{`Latest data: ${date}`}</h6>
       </div>
-      <h2 className="section-title">{setSectionTitle(showingNow).toUpperCase()}</h2>
+      <h2 className="section-title">
+        {setSectionTitle(showingNow).toUpperCase()}
+      </h2>
       <div className="menu-items">
         <MenuItems
           isPageCurrentlyVisited={isPageCurrentlyVisited}
@@ -163,17 +174,17 @@ const TitleSection = props => {
       />
     </div>
   );
-}
+};
 
-const Header = (props) => {
+const Header = props => {
   const {
     latestDataDate,
-    goToChronWithoutCountrySelected, 
-    changePage, 
-    showingNow, 
+    goToChronWithoutCountrySelected,
+    changePage,
+    showingNow,
     goHome
   } = props;
-  
+
   return (
     <header>
       <TitleSection
@@ -185,7 +196,7 @@ const Header = (props) => {
       />
     </header>
   );
-}
+};
 
 const Styles = {
   margin: {

@@ -1,11 +1,10 @@
 export const formatDate = (date = new Date()) => {
-  // const today = new Date();
   const day = date.getDate();
   const month = date.getMonth() + 1;
   const year = date.getFullYear();
 
   return `${day}.${month}.${year}`;
-}
+};
 
 export const setSectionTitle = showingNow => {
   switch (showingNow) {
@@ -27,7 +26,7 @@ export const setSectionTitle = showingNow => {
     default:
       return showingNow;
   }
-}
+};
 
 export const sortTableData = (key, array, shouldInvert = false) => {
   if (key === "country") {
@@ -57,7 +56,6 @@ export const sortTableData = (key, array, shouldInvert = false) => {
   }
 };
 
-
 export const sortData = (key, array, shouldInvert = false) => {
   if (key === "Country") {
     return [...array].sort((a, b) => {
@@ -68,10 +66,8 @@ export const sortData = (key, array, shouldInvert = false) => {
         return shouldInvert ? 1 : -1;
       }
       return 0;
-    })
-  } 
-  
-  else if (key === "Date of 1st case") {
+    });
+  } else if (key === "Date of 1st case") {
     return [...array].sort((a, b) => {
       if (new Date(`${a[key]} 2020`) > new Date(`${b[key]} 2020`)) {
         return shouldInvert ? -1 : 1;
@@ -81,9 +77,7 @@ export const sortData = (key, array, shouldInvert = false) => {
       }
       return 0;
     });
-  } 
-  
-  else {
+  } else {
     return [...array].sort((a, b) => {
       if (a[key] < b[key]) {
         return shouldInvert ? -1 : 1;
@@ -94,14 +88,12 @@ export const sortData = (key, array, shouldInvert = false) => {
       return 0;
     });
   }
-}
-
-
+};
 
 const keyValuesNotToAlter = ["Province/State", "Country/Region", "Lat", "Long"];
 
 export const chronologicalDataUtils = {
-  makeIntegersOfChronologicalData: (obj) => {
+  makeIntegersOfChronologicalData: obj => {
     const newObj = { ...obj };
     for (let [key, value] of Object.entries(newObj)) {
       if (keyValuesNotToAlter.indexOf(key) === -1) {
@@ -109,20 +101,24 @@ export const chronologicalDataUtils = {
       } else {
         newObj[key] = value;
       }
-    }  
+    }
     return newObj;
   },
 
-  formatDataByCountry: (dataSet) => {
-    const uniqueCountries = Array.from(new Set(dataSet.map(entry => entry["Country/Region"])));
-    
+  formatDataByCountry: dataSet => {
+    const uniqueCountries = Array.from(
+      new Set(dataSet.map(entry => entry["Country/Region"]))
+    );
+
     const finalData = [];
 
     uniqueCountries.forEach(country => {
       const objectToReturn = {};
       objectToReturn.country = country;
 
-      const commonCountryData = dataSet.filter(entry => entry["Country/Region"] === country);
+      const commonCountryData = dataSet.filter(
+        entry => entry["Country/Region"] === country
+      );
 
       for (let [key] of Object.entries(commonCountryData[0])) {
         if (keyValuesNotToAlter.indexOf(key) === -1) {
@@ -132,15 +128,15 @@ export const chronologicalDataUtils = {
         }
       }
       finalData.push(objectToReturn);
-    })
+    });
     return finalData;
   },
 
-  createUniqueDataset: (obj) => {
+  createUniqueDataset: obj => {
     const countries = Array.from(
       new Set(obj.total.map(entry => entry.country))
     );
-    
+
     const finalData = [];
 
     const withoutCountry = obj => {
@@ -152,9 +148,9 @@ export const chronologicalDataUtils = {
       }
       return objectToReturn;
     };
-    
+
     countries.forEach(country => {
-      const objectToReturn = {country};
+      const objectToReturn = { country };
       objectToReturn.totalCases = obj.total
         .filter(entry => entry.country === country)
         .map(entry => withoutCountry(entry))[0];
@@ -163,13 +159,13 @@ export const chronologicalDataUtils = {
         .map(entry => withoutCountry(entry))[0];
       objectToReturn.recovered = obj.recovered
         .filter(entry => entry.country === country)
-        .map(entry => withoutCountry(entry))[0];  
+        .map(entry => withoutCountry(entry))[0];
 
       finalData.push(objectToReturn);
-    })
+    });
     return finalData;
   }
-}
+};
 
 export const formatTableHeader = rawHeader => {
   switch (rawHeader) {
@@ -203,7 +199,7 @@ export const formatTableHeader = rawHeader => {
     default:
       return rawHeader.charAt(0).toUpperCase() + rawHeader.slice(1);
   }
-}
+};
 
 export const fixCountryNames = name => {
   switch (name) {
@@ -276,8 +272,7 @@ export const fixCountryNames = name => {
     default:
       return name;
   }
-}
-
+};
 
 export const getWorldTotalsHopkinsData = allData => {
   const totals = {};
@@ -296,17 +291,17 @@ export const getWorldTotalsHopkinsData = allData => {
   const reference = allData[0].activeCases;
   const yesterday = reference[reference.length - 2].date.getTime();
 
-  const getDataFromDayBefore = (key) => {
+  const getDataFromDayBefore = key => {
     return allData
       .map(entry => entry[key])
       .map(array => array.filter(item => item.date.getTime() === yesterday)[0])
       .filter(val => val !== undefined)
       .reduce((acc, curr) => acc + curr.cases, 0);
-  }
-  
+  };
+
   const activeCasesDayBefore = getDataFromDayBefore("activeCases");
   const deathsDayBefore = getDataFromDayBefore("deaths");
-  const recoveredDayBefore = getDataFromDayBefore("recovered");  
+  const recoveredDayBefore = getDataFromDayBefore("recovered");
 
   const [worldTotalCases, worldActiveCases, worldDeaths, worldRecovered] = [
     totalCases,
@@ -327,22 +322,8 @@ export const getWorldTotalsHopkinsData = allData => {
   totals.recovered = worldRecovered;
   totals.newRecovered = worldRecovered - recoveredDayBefore;
 
-  // console.log("TOT OBJECT", totals);
   return totals;
 };
-
-// export const addCommas = num => {
-//   num += ""; //convert it to string
-//   var x = num.split(".");
-//   var x1 = x[0];
-//   var x2 = x.length > 1 ? "." + x[1] : "";
-//   var rgx = /(\d+)(\d{3})/;
-//   while (rgx.test(x1)) {
-//     x1 = x1.replace(rgx, "$1" + "," + "$2");
-//   }
-//   return x1 + x2;
-// };
-
 
 export const addCommasToPlainNumbers = num => {
   const numsFormatted = [];
@@ -362,12 +343,11 @@ export const addCommasToPlainNumbers = num => {
     toReturn += "." + decimals;
   }
   return toReturn;
-}
-
+};
 
 const filterHelper = (earliestTimeStamp, data) => {
   return data.filter(item => item.date.getTime() >= earliestTimeStamp);
-}
+};
 
 export const filterResultsByDate = (periodFrom, dataObject) => {
   const filteredEntries = [];
@@ -401,9 +381,12 @@ export const filterResultsByDate = (periodFrom, dataObject) => {
       recovered: filterHelper(earliestTimeStamp, recovered),
       recoveredMillPop: filterHelper(earliestTimeStamp, recoveredMillPop),
       totalCases: filterHelper(earliestTimeStamp, totalCases),
-      totalCasesMillionPop: filterHelper(earliestTimeStamp, totalCasesMillionPop)
+      totalCasesMillionPop: filterHelper(
+        earliestTimeStamp,
+        totalCasesMillionPop
+      )
     });
-  })
+  });
 
   return filteredEntries;
-}
+};

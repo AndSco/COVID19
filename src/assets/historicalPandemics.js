@@ -43,14 +43,14 @@
 //           .replace(/,/g, "")
 //           .split("-")
 //           .map(entry => (multiply ? +entry * 1000000 : +entry))
-//           .reduce((a, b) => a + b, 0); 
+//           .reduce((a, b) => a + b, 0);
 
 //       const hasMillions = numDeaths.indexOf("M") !== -1;
 //       if (hasMillions) {
 //         indexToCut = findIndex("M");
 //         const nums = purifyEntry(indexToCut);
 //         const sum = splitAndReduce(nums, true);
-    
+
 //         plagueObj.numDeaths = sum / 2;
 //       } else {
 //         indexToCut = findIndex("(");
@@ -58,14 +58,14 @@
 //         console.log("NUMS", nums);
 //         const sum = splitAndReduce(nums);
 //         console.log("SUM", sum);
-  
-//         plagueObj.numDeaths = sum / 2;  
+
+//         plagueObj.numDeaths = sum / 2;
 //       }
 //     } else {
 //       const purified = numDeaths
 //         .replace(/,/g, "")
 //         .replace("M", "000000");
-//       plagueObj.numDeaths = +purified;  
+//       plagueObj.numDeaths = +purified;
 //     }
 
 //     pandemics.push(plagueObj);

@@ -6,7 +6,6 @@ import { faSkull, faSkullCrossbones } from "@fortawesome/free-solid-svg-icons";
 import { addCommasToPlainNumbers } from "../utils/functions";
 import VisibilitySensor from "react-visibility-sensor";
 
-
 const SideLine = props => {
   return (
     <div
@@ -23,14 +22,16 @@ const SideLine = props => {
           height: 60,
           borderRadius: 50,
           backgroundColor: "white",
-          display: "flex", 
-          alignItems: "center", 
+          display: "flex",
+          alignItems: "center",
           justifyContent: "center",
-          position: "fixed", 
+          position: "fixed",
           textAlign: "center"
         }}
       >
-        <h3 style={{ color: "black", margin: 0, fontSize: ".7rem" }}>{props.year}</h3>
+        <h3 style={{ color: "black", margin: 0, fontSize: ".7rem" }}>
+          {props.year}
+        </h3>
       </div>
       <div style={{ width: 1, backgroundColor: "white", flex: 1 }}></div>
     </div>
@@ -40,8 +41,25 @@ const SideLine = props => {
 const Selector = props => {
   const isSelected = props.showingNow === props.type;
   const isVictims = props.type === "victim";
-  return <h4 style={{marginRight: "3em", cursor: "pointer", fontSize: isSelected ? "1.1em" : ".8em", color: isSelected && isVictims ? "black" : isSelected && !isVictims ? "white" : "grey"}} onClick={() => props.changeViewType(props.type)}>{props.name}</h4>;
-}
+  return (
+    <h4
+      style={{
+        marginRight: "3em",
+        cursor: "pointer",
+        fontSize: isSelected ? "1.1em" : ".8em",
+        color:
+          isSelected && isVictims
+            ? "black"
+            : isSelected && !isVictims
+            ? "white"
+            : "grey"
+      }}
+      onClick={() => props.changeViewType(props.type)}
+    >
+      {props.name}
+    </h4>
+  );
+};
 
 const Skull = props => {
   return (
@@ -64,9 +82,7 @@ const shortenNumVictims = string => {
   return string;
 };
 
-
-
-const ChronologicalView = ({allPandemics, scale}) => {
+const ChronologicalView = ({ allPandemics, scale }) => {
   const [yearShowing, setYearShowing] = React.useState("1000");
 
   return (
@@ -77,16 +93,19 @@ const ChronologicalView = ({allPandemics, scale}) => {
           flexDirection: "column",
           width: "90%",
           flexWrap: "wrap",
-          justifyContent: "center",
+          justifyContent: "center"
         }}
       >
         {allPandemics.map(pandemic => {
           return (
-            <VisibilitySensor key={pandemic.name} onChange={(isVisible) => {
-              if (isVisible) {
-                setYearShowing(pandemic.period);
-              }
-              }}>
+            <VisibilitySensor
+              key={pandemic.name}
+              onChange={isVisible => {
+                if (isVisible) {
+                  setYearShowing(pandemic.period);
+                }
+              }}
+            >
               <div
                 style={{
                   display: "flex",
@@ -105,7 +124,7 @@ const ChronologicalView = ({allPandemics, scale}) => {
                     padding: "0 1em"
                   }}
                 >
-                  {pandemic.name} 
+                  {pandemic.name}
                 </h2>
                 <p>Type: {pandemic.type}</p>
 
@@ -136,7 +155,7 @@ const VictimView = props => {
         flexWrap: "wrap",
         justifyContent: "center",
         alignItems: "flex-end",
-        paddingBottom: "30px", 
+        paddingBottom: "30px",
         backgroundColor: "white"
       }}
     >
@@ -183,7 +202,7 @@ const VictimView = props => {
       })}
     </div>
   );
-}
+};
 
 const HistoricalPandemics = ({ covidDeaths }) => {
   const [typeOfView, setTypeOfView] = React.useState("victim");
@@ -197,7 +216,7 @@ const HistoricalPandemics = ({ covidDeaths }) => {
 
   const changeViewType = type => {
     setTypeOfView(type);
-  }
+  };
 
   const allPandemics = [...otherPandemics, covidData];
 
@@ -224,7 +243,7 @@ const HistoricalPandemics = ({ covidDeaths }) => {
           display: "flex",
           backgroundColor: typeOfView === "victim" ? "white" : "#282c34",
           color: "#282c34",
-          justifyContent: "flex-end", 
+          justifyContent: "flex-end",
           alignItems: "center"
         }}
       >
@@ -253,7 +272,4 @@ const HistoricalPandemics = ({ covidDeaths }) => {
   );
 };
 
-
 export default HistoricalPandemics;
-
-

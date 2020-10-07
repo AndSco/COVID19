@@ -7,12 +7,10 @@ import populationData from "../assets/populationData";
 const trimToFirstCase = array => {
   const firstInstance = array.filter(entry => entry.cases > 0)[0];
   const firstInstanceIndex = array.indexOf(firstInstance);
-  return array
-    .slice(firstInstanceIndex)
-    .map((entry, index) => {
-      entry.daySinceBeginning = index + 1;
-      return entry;
-    });
+  return array.slice(firstInstanceIndex).map((entry, index) => {
+    entry.daySinceBeginning = index + 1;
+    return entry;
+  });
 };
 
 const getLatestDataForACountry = countryObj => {
@@ -24,10 +22,10 @@ const getLatestDataForACountry = countryObj => {
       return "NA";
     }
     return toReturn.cases;
-  }
+  };
 
   const latestData = {};
-  
+
   const keys = [
     "totalCases",
     "activeCases",
@@ -39,20 +37,19 @@ const getLatestDataForACountry = countryObj => {
     "recoveredMillPop"
   ];
 
-  const {newActiveCases, newDeaths, country} = countryObj;
+  const { newActiveCases, newDeaths, country } = countryObj;
   latestData.country = country;
 
   keys.map(key => {
     latestData[key] = getLatestDataByKey(key);
     return latestData[key];
   });
-  
+
   latestData.newActiveCases = newActiveCases;
   latestData.newDeaths = newDeaths;
 
   return latestData;
-}
-
+};
 
 const getNewCases = (dataSet, key) => {
   const dataArray = dataSet[key];
@@ -62,14 +59,12 @@ const getNewCases = (dataSet, key) => {
 
   const getDayTimeStamp = dayIndexFromLast => {
     return dataArray[dataArray.length - dayIndexFromLast].date.getTime();
-  }
+  };
 
   const getValueFromDayIndex = timestamp => {
-    return dataArray.filter(
-    item => item.date.getTime() === timestamp
-  )[0].cases;
-  }
-  
+    return dataArray.filter(item => item.date.getTime() === timestamp)[0].cases;
+  };
+
   const yesterday = getDayTimeStamp(2);
   const today = getDayTimeStamp(1);
   const yesterdayValue = getValueFromDayIndex(yesterday);
@@ -77,7 +72,6 @@ const getNewCases = (dataSet, key) => {
   const difference = todayValue - yesterdayValue;
   return difference;
 };
-
 
 export const useDataMassaging = () => {
   const [allChronologicalData, setAllChronologicalData] = React.useState(null);
@@ -123,7 +117,7 @@ export const useDataMassaging = () => {
         const finalDataWithRightCountryNames = finalData.map(entry => {
           const [totalCases, deaths, recovered] = [
             entry.totalCases,
-            entry.deaths, 
+            entry.deaths,
             entry.recovered
           ].map(object => {
             return Object.entries(object).reduce((newArr, [key, value]) => {
@@ -135,8 +129,6 @@ export const useDataMassaging = () => {
             }, []);
           });
 
-          // console.log("WORKS?", activeCases, deaths, recovered);
-
           return {
             country: fixCountryNames(entry.country),
             totalCases: trimToFirstCase(totalCases),
@@ -147,9 +139,12 @@ export const useDataMassaging = () => {
 
         console.log("country names", finalDataWithRightCountryNames);
 
-        //Remove the 2 cruiseliners 
-        const dataWithoutCruiseLiners = finalDataWithRightCountryNames.filter(entry => entry.country !== "Diamond Princess" && entry.country !== "MS Zaandam");
-        
+        //Remove the 2 cruiseliners
+        const dataWithoutCruiseLiners = finalDataWithRightCountryNames.filter(
+          entry =>
+            entry.country !== "Diamond Princess" &&
+            entry.country !== "MS Zaandam"
+        );
 
         console.log("NO CRUISE", dataWithoutCruiseLiners);
 
@@ -220,7 +215,7 @@ export const useDataMassaging = () => {
             const recoveredToSubtract = entry.dailyRecovered.find(
               val => val.date === totalEntry.date
             ).cases;
-            // console.log("-Deaths", deathsToSubtract, "-Recovered", recoveredToSubtract);
+
             return {
               date: totalEntry.date,
               cases: totalEntry.cases - deathsToSubtract - recoveredToSubtract,
@@ -250,8 +245,11 @@ export const useDataMassaging = () => {
     };
 
     fetchData();
-  }, [createUniqueDataset, formatDataByCountry, makeIntegersOfChronologicalData]);
+  }, [
+    createUniqueDataset,
+    formatDataByCountry,
+    makeIntegersOfChronologicalData
+  ]);
 
   return allChronologicalData;
 };
-

@@ -1,12 +1,12 @@
 import React from "react";
-import {MenuItems} from "./Header";
+import { MenuItems } from "./Header";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 
 const MobileMenu = ({
   isPageCurrentlyVisited,
   handleClick,
-  goToChronWithoutCountrySelected, 
+  goToChronWithoutCountrySelected,
   closeMobileMenu
 }) => {
   return (

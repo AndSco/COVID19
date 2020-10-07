@@ -7,12 +7,12 @@
   position: absolute;
   z-index: 10;
   top: 0;
-  padding: .5rem;
+  padding: 0.5rem;
   flex-wrap: wrap;
   background-color: white;
-  -webkit-box-shadow: 0px 6px 7px -6px rgba(0,0,0,0.75);
-  -moz-box-shadow: 0px 6px 7px -6px rgba(0,0,0,0.75);
-  box-shadow: 0px 6px 7px -6px rgba(0,0,0,0.75);
+  -webkit-box-shadow: 0px 6px 7px -6px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 6px 7px -6px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 6px 7px -6px rgba(0, 0, 0, 0.75);
 }
 
 #menu {
@@ -28,20 +28,19 @@
   cursor: pointer;
   text-transform: uppercase;
   margin: 0;
-  padding: .5em 1.5em;
+  padding: 0.5em 1.5em;
   border-radius: 40px;
 }
 
 .options-button {
-    padding: 15px;
-    border: 1px solid #282c34;
-    cursor: pointer;
-    margin: 0;
-    margin-left: 1em;
-  }
+  padding: 15px;
+  border: 1px solid #282c34;
+  cursor: pointer;
+  margin: 0;
+  margin-left: 1em;
+}
 
-
-@media only screen and (max-width:900px) {
+@media only screen and (max-width: 900px) {
   #container {
     order: 3;
     width: 100vw;
@@ -64,7 +63,7 @@
   #now-showing {
     font-size: 12px;
   }
-  
+
   #showing-now {
     font-size: 14px;
   }

@@ -38,23 +38,23 @@ const ScatterPlot = props => {
 
   // Manage filtering results by time period
   const [timeFilteredData, setTimeFilteredData] = React.useState(null);
-  const [currentTimeFilter, setCurrentTimeFilter] = React.useState("fromBeginning");
+  const [currentTimeFilter, setCurrentTimeFilter] = React.useState(
+    "fromBeginning"
+  );
 
-  React.useEffect(() => console.log("cuu filter", currentTimeFilter), [currentTimeFilter])
-
+  React.useEffect(() => console.log("cuu filter", currentTimeFilter), [
+    currentTimeFilter
+  ]);
 
   const [dataToShowOnScreen, setDataToShowOnScreen] = React.useState(null);
-  
+
   React.useEffect(() => {
     if (timeFilteredData) {
       setDataToShowOnScreen(timeFilteredData);
     } else {
       setDataToShowOnScreen(currentData);
     }
-  }, [timeFilteredData, countriesSelected])
-  
-
-  
+  }, [timeFilteredData, countriesSelected]);
 
   const changeTimeFilteredData = timeUnit => {
     setIsShowingFromDayOne(false);
@@ -65,8 +65,6 @@ const ScatterPlot = props => {
     }
     setTimeFilteredData(filterResultsByDate(timeUnit, currentData));
   };
-
- 
 
   // Manage adding country for comparison
   const [isCountryListShowing, setIsCountryListShowing] = React.useState(false);
@@ -92,10 +90,8 @@ const ScatterPlot = props => {
     }
   }, [currentData, topic]);
 
-
   React.useEffect(() => {
     if (allChronologicalData) {
-      // console.log("ALL CHRON", allChronologicalData);
       getWorldTotalsHopkinsData(allChronologicalData);
       const dataToSet = [];
       countriesSelected.map(country =>
@@ -122,7 +118,6 @@ const ScatterPlot = props => {
   const changeTopic = topic => {
     setTopic(topic);
   };
-
 
   const allCountries = allChronologicalData
     ? allChronologicalData.map(entry => entry.country).sort()
@@ -167,7 +162,6 @@ const ScatterPlot = props => {
 
       const xAxis = d3
         .axisBottom(xScale)
-        // .ticks(10)
         .ticks(width / 100)
         .tickSize(5)
         .tickFormat(
@@ -179,8 +173,7 @@ const ScatterPlot = props => {
         .domain([minimumCases, maximumCases])
         .range([height - padding.top * 2, padding.bottom * 2]);
 
-      const yAxis = d3.axisLeft(yScale)
-        .ticks(8);
+      const yAxis = d3.axisLeft(yScale).ticks(8);
 
       const svgBox = d3.select(svgContainer.current);
 
@@ -189,7 +182,6 @@ const ScatterPlot = props => {
         .attr("id", "svg")
         .attr("width", width)
         .attr("height", height);
-      // .style("background-color", "white");
 
       const svg = d3.select("#svg");
 
@@ -340,6 +332,3 @@ const Styles = {
 };
 
 export default ScatterPlot;
-
-
-

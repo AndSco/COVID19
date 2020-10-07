@@ -1,7 +1,7 @@
 import React from "react";
 import { formatTableHeader, addCommasToPlainNumbers } from "../utils/functions";
 
-const ContentLine = ({label, data}) => {
+const ContentLine = ({ label, data }) => {
   return (
     <div className="summary-item">
       <h5 style={{ margin: 0 }}>{`${label}:`}</h5>
@@ -22,14 +22,15 @@ const SummaryBox = props => {
 
   Object.entries(content)
     .filter(([key]) => key !== "country" && key !== "population")
-    .map(([key, value]) => data.push(<ContentLine label={formatTableHeader(key)} data={value} key={key} />))
-
+    .map(([key, value]) =>
+      data.push(
+        <ContentLine label={formatTableHeader(key)} data={value} key={key} />
+      )
+    );
 
   return (
     <div id="summary-box">
-      <h4 id="summary-title">
-        {content.country}
-      </h4>
+      <h4 id="summary-title">{content.country}</h4>
       {data.length > 1 ? data : <h5>No data</h5>}
       {!isShowingWorldData && (
         <div>
@@ -58,7 +59,7 @@ const Styles = {
     color: "white",
     fontSize: 14,
     width: "100%",
-    textAlign: "center", 
+    textAlign: "center",
     borderRadius: 20
   }
 };

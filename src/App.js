@@ -1,5 +1,5 @@
-import React from 'react';
-import './App.css';
+import React from "react";
+import "./App.css";
 import Header from "./components/Header";
 import WorldMap from "./pages/WorldMap";
 import Table from "./pages/Table";
@@ -8,25 +8,29 @@ import ScatterPlot from "./pages/ScatterPlot";
 import BarChart from "./pages/BarChart";
 import { feature } from "topojson-client";
 import Spinner from "./components/Spinner";
-import {useDataMassaging} from "./utils/useDataMassaging";
+import { useDataMassaging } from "./utils/useDataMassaging";
 import topoData from "./assets/world-110m";
 import { getWorldTotalsHopkinsData } from "./utils/functions";
-import HistoricalPandemics from './pages/HistoricalPandemics';
-
+import HistoricalPandemics from "./pages/HistoricalPandemics";
 
 function App() {
   const [data, setData] = React.useState([]);
   const [worldwideData, setWorldwideData] = React.useState(null);
   const chronVirusData = useDataMassaging();
-  console.log("chron", chronVirusData)
+  console.log("chron", chronVirusData);
   const [virusData, setVirusData] = React.useState([]);
   const [summaryData, setSummaryData] = React.useState({});
   const [geographies, setGeographies] = React.useState([]);
   const [dataParameter, setDataParameter] = React.useState("totalCases");
   const [isShowingWorldData, setIsShowingWorldData] = React.useState(true);
-  const [indexGeographySelected, setIndexGeographySelected] = React.useState(null);
+  const [indexGeographySelected, setIndexGeographySelected] = React.useState(
+    null
+  );
   const [showingNow, setShowingNow] = React.useState("worldMap");
-  const [countryChronologicalData, setCountryChronologicalData] = React.useState(null);
+  const [
+    countryChronologicalData,
+    setCountryChronologicalData
+  ] = React.useState(null);
   const [latestDataDate, setLatestDataDate] = React.useState(null);
   // For selecting chron section without a country selected yet
   const [noCountrySelected, setNoCountrySelected] = React.useState(false);
@@ -36,7 +40,7 @@ function App() {
   const goToChronWithoutCountrySelected = () => {
     setNoCountrySelected(true);
     changePage("chronologicalData");
-  }
+  };
 
   const goToChronWithCountrySelected = () => {
     setNoCountrySelected(false);
@@ -44,8 +48,7 @@ function App() {
 
   const resetChronCountrySelected = () => {
     setCountryChronologicalData(null);
-  }
-
+  };
 
   React.useEffect(() => {
     if (chronVirusData) {
@@ -53,10 +56,8 @@ function App() {
       const lastDataDate = reference[reference.length - 1].date;
       setLatestDataDate(lastDataDate);
     }
-  }, [chronVirusData])
-  
+  }, [chronVirusData]);
 
-  
   React.useEffect(() => {
     const getData = async () => {
       const lastDayData = chronVirusData.map(entry => entry.latestData);
@@ -94,20 +95,17 @@ function App() {
     }
   }, [chronVirusData]);
 
- 
-
   const changeParameter = parameter => {
     setDataParameter(parameter);
-  }
+  };
 
   const goHome = () => {
     setShowingNow("worldMap");
-  }
+  };
 
-  
   const changeSummaryData = obj => {
     setSummaryData(obj);
-  }
+  };
 
   const resetSummaryData = () => {
     setIsShowingWorldData(true);
@@ -117,22 +115,20 @@ function App() {
 
   const noMoreShowingWorldData = () => {
     setIsShowingWorldData(false);
-  }
+  };
 
   const highlightCountry = index => {
     setIndexGeographySelected(index);
-  }
+  };
 
   const prepareCountryChronologicalData = countryName => {
     setCountryChronologicalData(countryName);
     changePage("chronologicalData");
-  }
+  };
 
   const changePage = pageName => {
     setShowingNow(pageName);
-  }
-
-
+  };
 
   if (data.length < 1) {
     return <Spinner />;

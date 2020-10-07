@@ -1,18 +1,25 @@
 import React, { useState } from "react";
 import MenuIconSelector from "./MenuIconSelector";
 
-
-
-const FilterOption = ({changeTimeFilteredData, timeUnit, text, isSelected, closePanel}) => {
+const FilterOption = ({
+  changeTimeFilteredData,
+  timeUnit,
+  text,
+  isSelected,
+  closePanel
+}) => {
   return (
-    <h5 style={{cursor: "pointer", color: isSelected ? "black" : "grey"}} onClick={() => {
-      changeTimeFilteredData(timeUnit);
-      closePanel();
-    }}>
+    <h5
+      style={{ cursor: "pointer", color: isSelected ? "black" : "grey" }}
+      onClick={() => {
+        changeTimeFilteredData(timeUnit);
+        closePanel();
+      }}
+    >
       {text}
-  </h5>
-  )
-}
+    </h5>
+  );
+};
 
 const TimeFilters = ({ changeTimeFilteredData, currentTimeFilter }) => {
   const [isPanelOpen, setIsPanelOpen] = useState(false);
@@ -24,7 +31,7 @@ const TimeFilters = ({ changeTimeFilteredData, currentTimeFilter }) => {
       <MenuIconSelector icon="calendar" onCLickFunction={togglePanel} />
       {isPanelOpen && (
         <div id="time-filters">
-          <h3 style={{color: "grey"}}>Filter by period</h3>
+          <h3 style={{ color: "grey" }}>Filter by period</h3>
           <FilterOption
             text="Since 1st case"
             timeUnit="fromBeginning"
@@ -38,7 +45,6 @@ const TimeFilters = ({ changeTimeFilteredData, currentTimeFilter }) => {
             isSelected={currentTimeFilter === "pastWeek"}
             changeTimeFilteredData={changeTimeFilteredData}
             closePanel={closePanel}
-            // changeTimeFilter={changeTimeFilter}
           />
           <FilterOption
             text="Past month"
@@ -53,6 +59,5 @@ const TimeFilters = ({ changeTimeFilteredData, currentTimeFilter }) => {
     </div>
   );
 };
-
 
 export default TimeFilters;

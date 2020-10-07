@@ -1,5 +1,9 @@
 import React from "react";
-import { sortTableData, formatTableHeader, addCommasToPlainNumbers } from "../utils/functions";
+import {
+  sortTableData,
+  formatTableHeader,
+  addCommasToPlainNumbers
+} from "../utils/functions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faSortAmountDown,
@@ -17,14 +21,14 @@ const tableHeaders = [
   "recovered",
   "totalCasesMillionPop",
   "activeCasesMillPop",
-  "deathsMillPop", 
+  "deathsMillPop",
   "recoveredMillPop",
   "newActiveCases",
   "newDeaths"
 ];
 
 const Table = props => {
-  const {virusData} = props;
+  const { virusData } = props;
   const [isSortedBy, setIsSortedBy] = React.useState("totalCases");
   const [data, setData] = React.useState(sortTableData(isSortedBy, virusData));
   const [wholeDataSet] = React.useState(virusData);
@@ -37,7 +41,11 @@ const Table = props => {
       const class_name = key === "country" ? "country-cell" : "";
       cells.push(
         <td key={key} className={class_name}>
-          {value ? key === "country" ? value : addCommasToPlainNumbers(value) : "NA"}
+          {value
+            ? key === "country"
+              ? value
+              : addCommasToPlainNumbers(value)
+            : "NA"}
         </td>
       );
     }
@@ -72,7 +80,10 @@ const Table = props => {
 
   return (
     <div id="table-container">
-      <p style={{fontSize: ".9em"}}>Sort countries by clicking on the table headers or find a country in the search bar. Then click on a country to see its chronological data.</p>
+      <p style={{ fontSize: ".9em" }}>
+        Sort countries by clicking on the table headers or find a country in the
+        search bar. Then click on a country to see its chronological data.
+      </p>
       <SearchBox filterElements={filterElements} resetData={resetData} />
       <div id="table-wrapper">
         <table>
@@ -118,9 +129,7 @@ const Table = props => {
               ))}
             </tr>
           </thead>
-          <tbody>
-            {data.map(key => createTableCells(key))}
-          </tbody>
+          <tbody>{data.map(key => createTableCells(key))}</tbody>
         </table>
       </div>
     </div>
@@ -128,118 +137,3 @@ const Table = props => {
 };
 
 export default Table;
-
-
-// import React from "react";
-// import {sortData} from "../utils/functions";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faSortAmountDown, faSortAmountDownAlt, faExchangeAlt } from "@fortawesome/free-solid-svg-icons";
-// import SearchBox from "./SearchBox";
-
-
-// const tableHeaders = [
-//   "Country",
-//   "Total cases",
-//   "New cases",
-//   "Total Deaths",
-//   "New deaths",
-//   "Total recovered",
-//   "Active cases",
-//   "Serious/Critical",
-//   "Tot cases / 1M pop",
-//   "Tot Deaths / 1M pop", 
-//   // "Date of 1st case"
-// ];
-
-// const Table = props => {
-//   const [data, setData] = React.useState(props.virusData);
-//   const [wholeDataSet, setWholeDataSet] = React.useState(props.virusData);
-//   const [isSortedBy, setIsSortedBy] = React.useState("Total cases");
-//   const [isSortedMaxMin, setIsSortedMaxMin] = React.useState(true);
-//   const dataWithoutTotal = data.filter(entry => entry.Country !== "Total:");
-//   const { prepareCountryChronologicalData } = props;
-
-//   const createTableCells = obj => {
-//     let cells = [];
-//     for (let [key, value] of Object.entries(obj)) {
-//       const class_name = key === "Country" ? "country-cell" : "";
-//       cells.push(<td key={key} className={class_name}>{value}</td>);
-//     }
-//     return (<tr key={obj.Country} onClick={() => {
-//       prepareCountryChronologicalData(obj.Country);
-//     }}>{cells}</tr>)
-//   };
-
-//   const isSortedByValue = value => {
-//     return value === isSortedBy;
-//   }
-
-//   const shouldReverseSorting = value => {
-//     return isSortedByValue(value) && isSortedMaxMin;
-//   }
-
-//   const filterElements = regex => {
-//     const filtered = wholeDataSet.filter(entry => entry.Country.match(regex));
-//     setData(filtered);
-//   }
-
-//   const resetData = () => {
-//     setData(wholeDataSet);
-//   }
-
-
-//   return (
-//     <div id="table-container">
-//       <SearchBox filterElements={filterElements} resetData={resetData} />
-//       <table>
-//         <thead>
-//           <tr>
-//             {tableHeaders.map((header, i) => (
-//               <th
-//                 key={i}
-//                 className={i === 0 ? "country-cell" : ""}
-//                 style={{
-//                   color: isSortedBy === header ? "#E518E8" : ""
-//                 }}
-//               >
-//                 <h4
-//                   onClick={() => {
-//                     setIsSortedBy(header);
-//                     setIsSortedMaxMin(
-//                       isSortedByValue(header) ? !isSortedMaxMin : true
-//                     );
-//                     setData(
-//                       sortData(
-//                         header,
-//                         dataWithoutTotal,
-//                         shouldReverseSorting(header)
-//                       )
-//                     );
-//                   }}
-//                 >
-//                   {header}
-//                   <FontAwesomeIcon
-//                     icon={
-//                       isSortedByValue(header)
-//                         ? isSortedMaxMin
-//                           ? faSortAmountDown
-//                           : faSortAmountDownAlt
-//                         : faExchangeAlt
-//                     }
-//                     rotation={isSortedByValue(header) ? undefined : 90}
-//                     className="sort-icon"
-//                   />
-//                 </h4>
-//               </th>
-//             ))}
-//           </tr>
-//         </thead>
-//         <tbody>
-//           {data.map(entry => createTableCells(entry))}
-//         </tbody>
-//       </table>
-//     </div>
-//   );
-// }
-
-// export default Table;

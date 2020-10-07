@@ -2,7 +2,6 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 
-
 const SearchBox = props => {
   const [input, setInput] = React.useState("");
   const [isSearching, setIsSearching] = React.useState(false);
@@ -13,13 +12,13 @@ const SearchBox = props => {
     setInput(enteredValue);
     const regex = new RegExp(enteredValue, "gi");
     filterElements(regex);
-  }
+  };
 
   const resetSearch = () => {
     setInput("");
     setIsSearching(false);
     resetData();
-  }
+  };
 
   React.useEffect(() => {
     if (input.length < 1) {
@@ -53,7 +52,7 @@ const SearchBox = props => {
       </div>
     </div>
   );
-}
+};
 
 const Styles = {
   inputContainer: {
@@ -62,7 +61,7 @@ const Styles = {
     border: ".6px solid #CACFD2",
     width: 200,
     alignSelf: "flex-end",
-    // marginBottom: "1em", 
+    // marginBottom: "1em",
     display: "flex"
   },
   input: {

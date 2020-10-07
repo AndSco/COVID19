@@ -1,11 +1,16 @@
-import React, {useState} from "react";
-import {formatTableHeader} from "../utils/functions";
+import React, { useState } from "react";
+import { formatTableHeader } from "../utils/functions";
 import OptionsIcon from "./OptionsIcon";
 import "../styles/optionsPanel.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 
-const MenuItem = ({ dataParameter, changeParameter, label, closeOptionPanel }) => {
+const MenuItem = ({
+  dataParameter,
+  changeParameter,
+  label,
+  closeOptionPanel
+}) => {
   const isSelected = dataParameter === label;
   return (
     <div className="menu-item">
@@ -33,16 +38,17 @@ const MenuItem = ({ dataParameter, changeParameter, label, closeOptionPanel }) =
   );
 };
 
-const OptionsPanel = ({ dataParameter, changeParameter, scope } ) => {
+const OptionsPanel = ({ dataParameter, changeParameter, scope }) => {
   const [isOptionPanelVisible, setIsOptionPanelVisible] = useState(false);
   const [showOptionsPerMillion, setIsShowOptionsPerMillion] = useState(false);
-  const toggleOptionPanel = () => setIsOptionPanelVisible(!isOptionPanelVisible);
+  const toggleOptionPanel = () =>
+    setIsOptionPanelVisible(!isOptionPanelVisible);
   const closeOptionPanel = () => setIsOptionPanelVisible(false);
 
   return isOptionPanelVisible ? (
     <div id="container">
       <div id="menu">
-        {!showOptionsPerMillion &&
+        {!showOptionsPerMillion && (
           <>
             <MenuItem
               label="totalCases"
@@ -69,26 +75,26 @@ const OptionsPanel = ({ dataParameter, changeParameter, scope } ) => {
               closeOptionPanel={closeOptionPanel}
             />
 
-            {scope !== "scatterplot" &&
-            <>
-              <MenuItem
-                label="newActiveCases"
-                dataParameter={dataParameter}
-                changeParameter={changeParameter}
-                closeOptionPanel={closeOptionPanel}
-              />
-              <MenuItem
-                label="newDeaths"
-                dataParameter={dataParameter}
-                changeParameter={changeParameter}
-                closeOptionPanel={closeOptionPanel}
-              />
-            </>  
-            }
+            {scope !== "scatterplot" && (
+              <>
+                <MenuItem
+                  label="newActiveCases"
+                  dataParameter={dataParameter}
+                  changeParameter={changeParameter}
+                  closeOptionPanel={closeOptionPanel}
+                />
+                <MenuItem
+                  label="newDeaths"
+                  dataParameter={dataParameter}
+                  changeParameter={changeParameter}
+                  closeOptionPanel={closeOptionPanel}
+                />
+              </>
+            )}
           </>
-        }
+        )}
 
-        {showOptionsPerMillion &&
+        {showOptionsPerMillion && (
           <>
             <MenuItem
               label="totalCasesMillionPop"
@@ -115,9 +121,12 @@ const OptionsPanel = ({ dataParameter, changeParameter, scope } ) => {
               closeOptionPanel={closeOptionPanel}
             />
           </>
-        }
-  
-        <h6 className="options-button" onClick={() => setIsShowOptionsPerMillion(!showOptionsPerMillion)}>
+        )}
+
+        <h6
+          className="options-button"
+          onClick={() => setIsShowOptionsPerMillion(!showOptionsPerMillion)}
+        >
           {showOptionsPerMillion
             ? "See absolute quantities"
             : "See quantities / 1 million population"}
@@ -140,6 +149,5 @@ const OptionsPanel = ({ dataParameter, changeParameter, scope } ) => {
     />
   );
 };
-
 
 export default OptionsPanel;

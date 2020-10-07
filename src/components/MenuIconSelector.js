@@ -2,13 +2,17 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendarAlt, faListUl } from "@fortawesome/free-solid-svg-icons";
 
-const MenuIconSelector = ({onCLickFunction, icon}) => {
+const MenuIconSelector = ({ onCLickFunction, icon }) => {
   return (
     <div style={styles.iconContainer} onClick={onCLickFunction}>
-      <FontAwesomeIcon icon={icon === "list" ? faListUl : faCalendarAlt} size="2x" color="#525050" />
+      <FontAwesomeIcon
+        icon={icon === "list" ? faListUl : faCalendarAlt}
+        size="2x"
+        color="#525050"
+      />
     </div>
   );
-}
+};
 
 const styles = {
   iconContainer: {
@@ -19,8 +23,7 @@ const styles = {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    cursor: "pointer",
-    // marginLeft: "1rem"
+    cursor: "pointer"
   }
 };
 
